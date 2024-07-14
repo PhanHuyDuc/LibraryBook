@@ -19,8 +19,15 @@ namespace LibraryBook.Infrastructure.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<MainMenu> MainMenus { get; set; }
         public DbSet<MenuCategory> MenuCategories { get; set; }
-        public DbSet<SubMenu> SubMenus { get; set; }
-        public DbSet<SubSubMenu> SubSubMenus { get; set; }
+        public DbSet<WebsiteInfomation> WebsiteInfomations { get; set; }
+        public DbSet<Media> Medias { get; set; }
+        public DbSet<MediaCategory> MediaCategories { get; set; }
+        public DbSet<Banner> Banners { get; set; }
+        public DbSet<BannerCategory> BannerCategories { get; set; }
+        public DbSet<Content> Contents { get; set; }
+        public DbSet<ContentCategory> ContentCategories { get; set; }
+        public DbSet<WidgetContentCategory> WidgetContentCategories { get; set; }
+        public DbSet<WidgetContent> WidgetContents { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

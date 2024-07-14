@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace LibraryBook.Domain.Entities
 {
-    public class MainMenu
+    public class Media
     {
         [Key]
         public int Id { get; set; }
-        public int? ParentId { get; set; }
-        public string MenuName { get; set; }
-        public string? MenuLink { get; set; }
+        public string Name { get; set; }
+        public string? Description { get; set; }
+        public string? MediaImage { get; set; }
+        public string MediaLink { get; set; }
         public int Order { get; set; }
         public bool IsActive { get; set; }
+        
         [ValidateNever]
-        public IEnumerable<MenuCategory> MainMenuCategory { get; set; }
+        public IEnumerable<MediaCategory> MediaCategories { get; set; }
+
     }
 }

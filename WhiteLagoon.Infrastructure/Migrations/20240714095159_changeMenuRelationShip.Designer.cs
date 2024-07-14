@@ -4,6 +4,7 @@ using LibraryBook.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryBook.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240714095159_changeMenuRelationShip")]
+    partial class changeMenuRelationShip
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,64 +138,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("LibraryBook.Domain.Entities.Banner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BannerLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BannerUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Banners");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.BannerCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("BannerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BannerId");
-
-                    b.ToTable("BannerCategories");
-                });
-
             modelBuilder.Entity("LibraryBook.Domain.Entities.Booking", b =>
                 {
                     b.Property<int>("Id")
@@ -267,74 +212,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("LibraryBook.Domain.Entities.Content", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Approved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentAvata")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentSource")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly?>("Created_Date")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAcive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSpecial")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShortDes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly?>("Updated_Date")
-                        .HasColumnType("date");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Contents");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.ContentCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContentCategories");
-                });
-
             modelBuilder.Entity("LibraryBook.Domain.Entities.MainMenu", b =>
                 {
                     b.Property<int>("Id")
@@ -347,6 +224,7 @@ namespace LibraryBook.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("MenuLink")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MenuName")
@@ -356,71 +234,12 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ParentId")
+                    b.Property<int>("ParentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("MainMenus");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.Media", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MediaImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MediaLink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medias");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.MediaCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MediaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MediaId");
-
-                    b.ToTable("MediaCategories");
                 });
 
             modelBuilder.Entity("LibraryBook.Domain.Entities.MenuCategory", b =>
@@ -432,6 +251,7 @@ namespace LibraryBook.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MainMenuId")
@@ -572,105 +392,6 @@ namespace LibraryBook.Infrastructure.Migrations
                             Villa_Number = 301,
                             VillaId = 3
                         });
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.WebsiteInfomation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Fax")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteAdminTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteAdress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteEmail2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteEmail3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsitePhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsitePhoneNumber2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsitePhoneNumber3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WebsiteInfomations");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.WidgetContent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WidgetContents");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.WidgetContentCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WidgetContentCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -817,13 +538,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Navigation("Villa");
                 });
 
-            modelBuilder.Entity("LibraryBook.Domain.Entities.BannerCategory", b =>
-                {
-                    b.HasOne("LibraryBook.Domain.Entities.Banner", null)
-                        .WithMany("BannerCategories")
-                        .HasForeignKey("BannerId");
-                });
-
             modelBuilder.Entity("LibraryBook.Domain.Entities.Booking", b =>
                 {
                     b.HasOne("LibraryBook.Domain.Entities.ApplicationUser", "User")
@@ -841,13 +555,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Navigation("User");
 
                     b.Navigation("Villa");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.MediaCategory", b =>
-                {
-                    b.HasOne("LibraryBook.Domain.Entities.Media", null)
-                        .WithMany("MediaCategories")
-                        .HasForeignKey("MediaId");
                 });
 
             modelBuilder.Entity("LibraryBook.Domain.Entities.MenuCategory", b =>
@@ -919,19 +626,9 @@ namespace LibraryBook.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LibraryBook.Domain.Entities.Banner", b =>
-                {
-                    b.Navigation("BannerCategories");
-                });
-
             modelBuilder.Entity("LibraryBook.Domain.Entities.MainMenu", b =>
                 {
                     b.Navigation("MainMenuCategory");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.Media", b =>
-                {
-                    b.Navigation("MediaCategories");
                 });
 
             modelBuilder.Entity("LibraryBook.Domain.Entities.Villa", b =>
