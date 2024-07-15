@@ -106,7 +106,7 @@ namespace LibraryBook.Infrastructure.Data
                     Id = 1,
                     Name = "A",
                     Description = "B",
-                    VillaId =1
+                    VillaId = 1
                 },
                  new Amenity
                  {
@@ -116,6 +116,13 @@ namespace LibraryBook.Infrastructure.Data
                      VillaId = 2
                  }
                 );
+            modelBuilder.Entity<WebsiteInfomation>().HasData(new WebsiteInfomation
+            {
+                Id= 1,
+                WebsiteName = "Your name website",
+                WebsiteAddress = "Your Address",
+                WebsitePhoneNumber = "Your PhoneNumber",
+            });
         }
     }
 }

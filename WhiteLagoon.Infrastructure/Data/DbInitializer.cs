@@ -15,15 +15,18 @@ namespace LibraryBook.Infrastructure.Data
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        
         private readonly ApplicationDbContext _db;
 
         public DbInitializer(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
+            
             ApplicationDbContext db)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            
             _db = db;
         }
         public void Initialize()
@@ -50,8 +53,9 @@ namespace LibraryBook.Infrastructure.Data
                     }, "Phate@123").GetAwaiter().GetResult();
 
                     ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@gmail.com");
-                    _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
+                    _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();                    
                 }
+
             }
             catch (Exception e)
             {

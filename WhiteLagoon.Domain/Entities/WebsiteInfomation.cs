@@ -12,7 +12,7 @@ namespace LibraryBook.Domain.Entities
         [Key]
         public int Id { get; set; }
         public string WebsiteName { get; set; }
-        public string WebsiteAdress { get; set; }
+        public string WebsiteAddress { get; set; }
         public string WebsitePhoneNumber { get; set; }
         public string? WebsitePhoneNumber2 { get; set; }
         public string? WebsitePhoneNumber3 { get; set; }

@@ -13,6 +13,7 @@ namespace LibraryBook.Application.Common.Interfaces
         IAmenityRepository Amenity { get; }
         IBookingRepository Booking { get; }
         IApplicationUserRepository User { get; }
+        IWebsiteInfomationRepository WebsiteInfomation { get; }
         void Save();
     }
 }

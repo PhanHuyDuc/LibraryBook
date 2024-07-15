@@ -18,6 +18,7 @@ namespace LibraryBook.Infrastructure.Repositoty
         public IAmenityRepository Amenity { get; private set; }
         public IBookingRepository Booking { get; private set; }
         public IApplicationUserRepository User { get; private set; }
+        public IWebsiteInfomationRepository WebsiteInfomation { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -27,6 +28,7 @@ namespace LibraryBook.Infrastructure.Repositoty
             Amenity = new AmenityRepository(_db);
             Booking = new BookingRepository(_db);
             User = new ApplicationUserRepository(_db);
+            WebsiteInfomation = new WebsiteInfomationRepository(_db);
         }
 
         public void Save()

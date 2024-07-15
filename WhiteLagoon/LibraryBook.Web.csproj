@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\VillaImage\" />
     <Folder Include="wwwroot\exports\" />
+    <Folder Include="wwwroot\Admin\" />
   </ItemGroup>
 
 </Project>

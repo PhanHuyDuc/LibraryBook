@@ -72,5 +72,6 @@ namespace LibraryBook.Application.Common.Utility
 
             return RadialBarChartDto;
         }
+        
     }
 }
