@@ -25,6 +25,7 @@ builder.Services.AddScoped<IVillaService,VillaService>();
 builder.Services.AddScoped<IVillaNumberService,VillaNumberService>();
 builder.Services.AddScoped<IAmenityService,AmenityService>();
 builder.Services.AddScoped<IBookingService,BookingService>();
+builder.Services.AddScoped<IWebsiteInfomationService,WebsiteInfomationService>();
 
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.ConfigureApplicationCookie(option =>

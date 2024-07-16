@@ -12,12 +12,14 @@ namespace LibraryBook.Controllers
     public class HomeController : Controller
     {
         private readonly IVillaService _villaService;
+        private readonly IWebsiteInfomationService _websiteInfomationService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public HomeController(IVillaService villaService, IWebHostEnvironment webHostEnvironment)
+        public HomeController(IVillaService villaService, IWebHostEnvironment webHostEnvironment, IWebsiteInfomationService websiteInfomationService)
         {
             _villaService = villaService;
             _webHostEnvironment = webHostEnvironment;
+            _websiteInfomationService = websiteInfomationService;
         }
 
         public IActionResult Index()
@@ -27,7 +29,7 @@ namespace LibraryBook.Controllers
                 VillaList = _villaService.GetAllVillas(),
                 Nights = 1,
                 CheckInDate = DateOnly.FromDateTime(DateTime.Now),
-
+                WebsiteInfomations = _websiteInfomationService.GetInfoById(1)
             };
             return View(homeVM);
         }

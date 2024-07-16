@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryBook.Application.Common.Interfaces;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
 
@@ -19,7 +20,7 @@ namespace LibraryBook.Application.Common.Utility
         public const string StatusCompleted = "Completed";
         public const string StatusCancelled = "Cancelled";
         public const string StatusRefunded = "Refunded";
-
+         
         public static int VillaRoomsAvailable_Count(int villaId,
            List<VillaNumber> villaNumberList, DateOnly checkInDate, int nights,
           List<Booking> bookings)
@@ -72,6 +73,6 @@ namespace LibraryBook.Application.Common.Utility
 
             return RadialBarChartDto;
         }
-        
+       
     }
 }

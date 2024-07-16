@@ -1,0 +1,96 @@
+﻿@model WebsiteInfomation
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-white py-2">Update Website Infomation</h1>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form class="row" method="post" enctype="multipart/form-data">
+            <input asp-for="Id" hidden />
+            <div class="p-3">
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsiteName" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsiteName">WebsiteName</label>
+                    <span asp-validation-for="WebsiteName" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsiteAddress" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsiteAddress">WebsiteAddress</label>
+                    <span asp-validation-for="WebsiteAddress" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsitePhoneNumber" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsitePhoneNumber">WebsitePhoneNumber</label>
+                    <span asp-validation-for="WebsitePhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsitePhoneNumber2" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsitePhoneNumber2">WebsitePhoneNumber2</label>
+                    <span asp-validation-for="WebsitePhoneNumber2" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsitePhoneNumber3" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsitePhoneNumber3">WebsitePhoneNumber3</label>
+                    <span asp-validation-for="WebsitePhoneNumber3" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsiteEmail" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsiteEmail">WebsiteEmail</label>
+                    <span asp-validation-for="WebsiteEmail" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsiteEmail2" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsiteEmail2">WebsiteEmail2</label>
+                    <span asp-validation-for="WebsiteEmail2" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsiteEmail3" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsiteEmail3">WebsiteEmail3</label>
+                    <span asp-validation-for="WebsiteEmail3" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="Fax" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="Fax">Fax</label>
+                    <span asp-validation-for="Fax" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsiteUrl" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsiteUrl">WebsiteUrl</label>
+                    <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsiteTitle" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsiteTitle">WebsiteTitle</label>
+                    <span asp-validation-for="WebsiteTitle" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="WebsiteAdminTitle" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="WebsiteAdminTitle">WebsiteAdminTitle</label>
+                    <span asp-validation-for="WebsiteAdminTitle" class="text-danger"></span>
+                </div>
+              
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-circle"></i> Update
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a class="btn btn-secondary w-100" asp-controller="WebsiteInfomation" asp-action="Index">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
