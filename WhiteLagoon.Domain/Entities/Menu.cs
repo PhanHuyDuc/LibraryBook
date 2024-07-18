@@ -18,7 +18,7 @@ namespace LibraryBook.Domain.Entities
         public string? MenuLink { get; set; }
         public int Order { get; set; }
         public bool IsActive { get; set; }
-        [ForeignKey(nameof(MenuCategory))]
+        [ForeignKey("MenuCategory")]
         public int MenuCategoryId { get; set; }
         
         [ValidateNever]
