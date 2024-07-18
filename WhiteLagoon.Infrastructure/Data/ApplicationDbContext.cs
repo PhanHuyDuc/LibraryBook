@@ -17,7 +17,7 @@ namespace LibraryBook.Infrastructure.Data
         public DbSet<VillaNumber> VillaNumbers { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        public DbSet<MainMenu> MainMenus { get; set; }
+        public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuCategory> MenuCategories { get; set; }
         public DbSet<WebsiteInfomation> WebsiteInfomations { get; set; }
         public DbSet<Media> Medias { get; set; }

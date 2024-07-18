@@ -14,6 +14,8 @@ namespace LibraryBook.Application.Common.Interfaces
         IBookingRepository Booking { get; }
         IApplicationUserRepository User { get; }
         IWebsiteInfomationRepository WebsiteInfomation { get; }
+        IMenuRepository Menu { get; }
+        IMenuCategoryRepository MenuCategory { get; }
         void Save();
     }
 }

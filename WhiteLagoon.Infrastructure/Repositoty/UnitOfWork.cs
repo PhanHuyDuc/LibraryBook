@@ -11,7 +11,7 @@ namespace LibraryBook.Infrastructure.Repositoty
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
-        public IVillaRepository Villa {  get; private set; }
+        public IVillaRepository Villa { get; private set; }
 
         public IVillaNumberRepository VillaNumber { get; private set; }
 
@@ -19,6 +19,8 @@ namespace LibraryBook.Infrastructure.Repositoty
         public IBookingRepository Booking { get; private set; }
         public IApplicationUserRepository User { get; private set; }
         public IWebsiteInfomationRepository WebsiteInfomation { get; private set; }
+        public IMenuRepository Menu { get; private set; }
+        public IMenuCategoryRepository MenuCategory { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -29,6 +31,8 @@ namespace LibraryBook.Infrastructure.Repositoty
             Booking = new BookingRepository(_db);
             User = new ApplicationUserRepository(_db);
             WebsiteInfomation = new WebsiteInfomationRepository(_db);
+            Menu = new MenuRepository(_db);
+            MenuCategory = new MenuCategoryRepository(_db);
         }
 
         public void Save()

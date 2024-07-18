@@ -4,6 +4,7 @@ using LibraryBook.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryBook.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240718175056_something")]
+    partial class something
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -405,9 +408,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("MenuCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("MenuLink")
                         .HasColumnType("nvarchar(max)");
 
@@ -423,8 +423,6 @@ namespace LibraryBook.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MenuCategoryId");
-
                     b.ToTable("Menus");
                 });
 
@@ -439,11 +437,16 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MenuId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MenuId");
 
                     b.ToTable("MenuCategories");
                 });
@@ -859,15 +862,11 @@ namespace LibraryBook.Infrastructure.Migrations
                         .HasForeignKey("MediaId");
                 });
 
-            modelBuilder.Entity("LibraryBook.Domain.Entities.Menu", b =>
+            modelBuilder.Entity("LibraryBook.Domain.Entities.MenuCategory", b =>
                 {
-                    b.HasOne("LibraryBook.Domain.Entities.MenuCategory", "MenuCategory")
-                        .WithMany()
-                        .HasForeignKey("MenuCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MenuCategory");
+                    b.HasOne("LibraryBook.Domain.Entities.Menu", null)
+                        .WithMany("MenuCategory")
+                        .HasForeignKey("MenuId");
                 });
 
             modelBuilder.Entity("LibraryBook.Domain.Entities.VillaNumber", b =>
@@ -940,6 +939,11 @@ namespace LibraryBook.Infrastructure.Migrations
             modelBuilder.Entity("LibraryBook.Domain.Entities.Media", b =>
                 {
                     b.Navigation("MediaCategories");
+                });
+
+            modelBuilder.Entity("LibraryBook.Domain.Entities.Menu", b =>
+                {
+                    b.Navigation("MenuCategory");
                 });
 
             modelBuilder.Entity("LibraryBook.Domain.Entities.Villa", b =>
