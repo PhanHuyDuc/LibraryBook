@@ -15,6 +15,6 @@ namespace LibraryBook.Application.Services.Interface
         void UpdateWebsiteInfomation(WebsiteInfomation websiteInfomation);
         bool DeleteWebsiteInfomation(int id);
 
-       
+        WebsiteInfomation GetWebsiteInformation(int id);
     }
 }

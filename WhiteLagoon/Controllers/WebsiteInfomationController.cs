@@ -46,7 +46,5 @@ namespace LibraryBook.Web.Controllers
             TempData["error"] = "Updated failed";
             return View();
         }
-
-
     }
 }

@@ -48,12 +48,12 @@ namespace LibraryBook.Application.Services.Implementation
 
         public IEnumerable<Menu> GetAllMenu()
         {
-           return _unitOfWork.Menu.GetAll();
+           return _unitOfWork.Menu.GetAll(includeProperties:"MenuCategory");
         }
 
         public Menu GetMenuById(int id)
         {
-            return _unitOfWork.Menu.Get(u=>u.Id == id);
+            return _unitOfWork.Menu.Get(u=>u.Id == id, includeProperties: "MenuCategory");
         }
 
         public void UpdateMenu(Menu menu)

@@ -9,40 +9,41 @@
     </div>
     <div class="card-body border p-4">
         <form class="row" method="post">
+            <input asp-for="@Model.Menu.Id" hidden />
             <div class="p-3">
                 <div class="form-floating py-1 col-12">
-                    <select class="form-select border shadow" asp-for="@Model.Menu.MenuCategoryId" asp-items="@Model.MenuCategoryList">
+                    <select class="form-select border shadow" disabled asp-for="@Model.Menu.MenuCategoryId" asp-items="@Model.MenuCategoryList">
                         <option disabled selected>--Select Menu Category--</option>
                     </select>
                     <label class="ms-2" asp-for="Menu.MenuCategoryId">Menu Category</label>
                     <span asp-validation-for="Menu.MenuCategoryId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input type="text" asp-for="@Model.Menu.MenuName" class="form-control border shadow" />
+                    <input type="text" disabled asp-for="@Model.Menu.MenuName" class="form-control border shadow" />
                     <label class="ms-2" asp-for="@Model.Menu.MenuName">Menu Name</label>
                     <span asp-validation-for="@Model.Menu.MenuName" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <select class="form-select border shadow" asp-for="@Model.Menu.ParentId" asp-items="@Model.MenuParentList">
+                    <select class="form-select border shadow" disabled asp-for="@Model.Menu.ParentId" asp-items="@Model.MenuParentList">
                         <option disabled selected>--Select Menu Parent--</option>
                     </select>
                     <label class="ms-2" asp-for="Menu.ParentId">Menu Parent</label>
                     <span asp-validation-for="Menu.ParentId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input type="text" asp-for="@Model.Menu.MenuLink" class="form-control border shadow" />
+                    <input type="text" disabled asp-for="@Model.Menu.MenuLink" class="form-control border shadow" />
                     <label class="ms-2" asp-for="@Model.Menu.MenuLink">Menu Link</label>
                     <span asp-validation-for="@Model.Menu.MenuLink" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input type="number" asp-for="@Model.Menu.Order" class="form-control border shadow" value="1"/>
+                    <input type="number" disabled asp-for="@Model.Menu.Order" class="form-control border shadow" />
                     <label class="ms-2" asp-for="@Model.Menu.Order">Order</label>
                     <span asp-validation-for="@Model.Menu.Order" class="text-danger"></span>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-check-circle"></i> Create
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="bi bi-check-circle"></i> Delete
                         </button>
                     </div>
                     <div class="col-6 col-md-3">

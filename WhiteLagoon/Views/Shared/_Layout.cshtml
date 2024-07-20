@@ -1,57 +1,39 @@
-﻿
+﻿@{
+    var webConfig = webInfo.GetWebsiteInformation(1);
+}
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>test</title>
-
+    <meta name="description" content="@webConfig.WebsiteName">
+    <meta name="author" content="Phate">
+    <title>@webConfig.WebsiteTitle</title>
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap"
-        rel="stylesheet">
-
-    
+        rel="stylesheet">    
     <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="~/assets/css/bootstrap-icons.css">
-
     <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
-
     <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
-
     <link href="~/assets/css/templatemo-pod-talk.css" rel="stylesheet">
     <link href="~/css/spinner.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-    <!--
-
-TemplateMo 584 Pod Talk
-
-https://templatemo.com/tm-584-pod-talk
-
--->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" 
+    integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
 </head>
-
 <body>
-
     <main>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand me-lg-5 me-0" href="index.html">
                     <img src="~/assets/images/pod-talk-logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
                 </a>
-
                 <form action="#" method="get" class="custom-form search-form flex-fill me-3" role="search">
                     <div class="input-group input-group-lg">
                         <input name="search" type="search" class="form-control" id="search" placeholder="Search Podcast"
@@ -93,15 +75,14 @@ https://templatemo.com/tm-584-pod-talk
                             <a class="nav-link" href="contact.html">Contact</a>
                         </li>
                     </ul>
-
                     <div class="ms-4">
-                        <a href="#section_3" class="btn custom-btn custom-border-btn smoothscroll">Get started</a>
+                        <a asp-controller="Account" asp-action="Login" class="btn custom-btn custom-border-btn smoothscroll">Login</a>
                     </div>
-                    <partial name="_LoginPartial" />
+                    
                 </div>
             </div>
         </nav>
-
+       
         <div class="loading spinner" style="display:none">Loading...</div>
         <partial name="_Notification" />
         @RenderBody()

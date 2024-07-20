@@ -61,5 +61,9 @@ namespace LibraryBook.Application.Services.Implementation
             _unitOfWork.WebsiteInfomation.Update(websiteInfomation);
             _unitOfWork.Save();
         }
+        public WebsiteInfomation GetWebsiteInformation(int id)
+        {
+            return _unitOfWork.WebsiteInfomation.Get(w => w.Id == id);
+        }
     }
 }

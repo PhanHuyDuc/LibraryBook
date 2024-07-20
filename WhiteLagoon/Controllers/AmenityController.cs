@@ -132,7 +132,6 @@ namespace LibraryBook.Web.Controllers
                 
                 TempData["success"] = "Deleted successfully";
                 return RedirectToAction(nameof(Index));
-
             }
             TempData["error"] = "Amenity can not deleted";
             return View();

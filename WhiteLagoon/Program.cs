@@ -39,6 +39,7 @@ builder.Services.Configure<IdentityOptions>(option =>
 {
     option.Password.RequiredLength = 8;
 });
+
 var app = builder.Build();
 StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 SyncfusionLicenseProvider.RegisterLicense(builder.Configuration.GetSection("Syncfusion:Licensekey").Get<string>());

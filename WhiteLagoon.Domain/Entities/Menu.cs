@@ -14,6 +14,7 @@ namespace LibraryBook.Domain.Entities
         [Key]
         public int Id { get; set; }
         public int? ParentId { get; set; }
+        public string? MenuParentName { get; set; }
         public string MenuName { get; set; }
         public string? MenuLink { get; set; }
         public int Order { get; set; }

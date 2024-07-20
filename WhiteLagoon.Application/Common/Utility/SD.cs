@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LibraryBook.Application.Common.Interfaces;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryBook.Application.Common.Utility
 {
@@ -73,6 +74,6 @@ namespace LibraryBook.Application.Common.Utility
 
             return RadialBarChartDto;
         }
-       
+      
     }
 }
