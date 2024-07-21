@@ -2,6 +2,7 @@
 using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -62,12 +63,12 @@ namespace LibraryBook.Web.Controllers
                     if (parentMenu != null)
                     {
                         obj.Menu.MenuParentName = parentMenu.MenuName;
-                        obj.Menu.TreeView = parentMenu.TreeView + 1;                       
+                        obj.Menu.TreeView = parentMenu.TreeView + 1;
                     }
                 }
                 else
                 {
-                    obj.Menu.TreeView = 1;                    
+                    obj.Menu.TreeView = 1;
                 }
                 obj.Menu.IsActive = true;
                 _menuService.CreateMenu(obj.Menu);
@@ -173,7 +174,7 @@ namespace LibraryBook.Web.Controllers
                     {
                         menuVM.Menu.TreeView = 1;
                     }
-                }                
+                }
                 menuVM.Menu.IsActive = true;
                 _menuService.UpdateMenu(menuVM.Menu);
                 TempData["success"] = "Updated successfully";
@@ -242,5 +243,16 @@ namespace LibraryBook.Web.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        #region API Calls
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetMenuDataJson()
+        {
+            IEnumerable<Menu> objMenus;
+            objMenus = _menuService.GetAllMenu();
+            return Json(new { data = objMenus });
+        }
+        #endregion
     }
 }

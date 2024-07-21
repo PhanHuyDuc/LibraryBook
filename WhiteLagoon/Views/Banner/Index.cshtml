@@ -1,29 +1,30 @@
-﻿@model IEnumerable<Menu>
+﻿@model IEnumerable<Banner>
 
 <div class="w-100 card border-0 p-4">
     <div class="card-header bg-success bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Menu</h2>
+                <h2 class="text-white py-2">Banner</h2>
             </div>
         </div>
     </div>
     <div class="card-body border p-4">
         <div class="row pb-3">
             <div class="col-6 offset-6 text-end">
-                <a asp-controller="Menu" asp-action="Create" class="btn btn-secondary">
-                    <i class="bi bi-plus-circle"></i> Create New Menu
+                <a asp-controller="Banner" asp-action="Create" class="btn btn-secondary">
+                    <i class="bi bi-plus-circle"></i> Create New Banner
                 </a>
             </div>
         </div>
-        <table class="table table-bordered table-striped" id="menuTable">
+        <table class="table table-bordered table-striped" id="bannerTable">
             <thead>
                 <tr>
-                    <th>Menu Category</th>
-                    <th>Menu Parent</th>
-                    <th>Menu Name</th>
+                    <th>Banner Category</th>
+                    <th>Banner Name</th>
+                    <th>Description</th>                    
                     <th>Menu Link</th>
                     <th>Order</th>
+                    <th>Banner Avata</th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,34 +32,35 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@obj.MenuCategory.Name</td>
-                        <td>@obj.MenuParentName</td>
-                        <td>@obj.MenuName</td>
-                        <td>@obj.MenuLink</td>
+                        <td>@obj.BannerCategory.Name</td>
+                        <td>@obj.Name</td>
+                        <td>@obj.Description</td>
+                        <td>@obj.BannerLink</td>
                         <td>@obj.Order</td>
+                        <td>@obj.BannerUrl</td>
                         <td>
                             <div class="w-75 btn-group" role="group">
                                 @{
                                     if (obj.IsActive)
                                     {
-                                        <a asp-controller="Menu" asp-action="ChangeStatusMenu" asp-route-menuId="@obj.Id"
+                                        <a asp-controller="Banner" asp-action="ChangeStatusBanner" asp-route-bannerId="@obj.Id"
                                            class="btn btn-success mx-2">
                                             <i class="bi bi-play-fill"></i> Active
                                         </a>
                                     }
                                     else
                                     {
-                                        <a asp-controller="Menu" asp-action="ChangeStatusMenu" asp-route-menuId="@obj.Id"
+                                        <a asp-controller="Banner" asp-action="ChangeStatusBanner" asp-route-bannerId="@obj.Id"
                                            class="btn btn-warning mx-2">
                                             <i class="bi bi-pause-fill"></i> Disable
                                         </a>
                                     }
                                 }
-                                <a asp-controller="Menu" asp-action="Update" asp-route-menuId="@obj.Id"
+                                <a asp-controller="Banner" asp-action="Update" asp-route-bannerId="@obj.Id"
                                    class="btn btn-success mx-2">
                                     <i class="bi bi-pencil-square"></i> Update
                                 </a>
-                                <a asp-controller="Menu" asp-action="Delete" asp-route-menuId="@obj.Id"
+                                <a asp-controller="Banner" asp-action="Delete" asp-route-bannerId="@obj.Id"
                                    class="btn btn-danger mx-2">
                                     <i class="bi bi-trash-fill"></i> Delete
                                 </a>
@@ -74,7 +76,7 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $('#menuTable').DataTable();
+            $('#bannerTable').DataTable();
         });
     </script>
 }

@@ -4,6 +4,7 @@ using LibraryBook.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryBook.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240721132624_AddForeignKeyBannerToDb")]
+    partial class AddForeignKeyBannerToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,9 +287,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<string>("ContentAvata")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ContentCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ContentSource")
                         .HasColumnType("nvarchar(max)");
 
@@ -314,8 +314,6 @@ namespace LibraryBook.Infrastructure.Migrations
                         .HasColumnType("date");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContentCategoryId");
 
                     b.ToTable("Contents");
                 });
@@ -354,9 +352,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("MediaCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("MediaImage")
                         .HasColumnType("nvarchar(max)");
 
@@ -373,8 +368,6 @@ namespace LibraryBook.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MediaCategoryId");
-
                     b.ToTable("Medias");
                 });
 
@@ -390,11 +383,16 @@ namespace LibraryBook.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MediaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MediaId");
 
                     b.ToTable("MediaCategories");
                 });
@@ -668,12 +666,7 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int>("WidgetContentCategoryId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WidgetContentCategoryId");
 
                     b.ToTable("WidgetContents");
                 });
@@ -872,26 +865,11 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Navigation("Villa");
                 });
 
-            modelBuilder.Entity("LibraryBook.Domain.Entities.Content", b =>
+            modelBuilder.Entity("LibraryBook.Domain.Entities.MediaCategory", b =>
                 {
-                    b.HasOne("LibraryBook.Domain.Entities.ContentCategory", "ContentCategory")
-                        .WithMany()
-                        .HasForeignKey("ContentCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ContentCategory");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.Media", b =>
-                {
-                    b.HasOne("LibraryBook.Domain.Entities.MediaCategory", "MediaCategory")
-                        .WithMany()
-                        .HasForeignKey("MediaCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MediaCategory");
+                    b.HasOne("LibraryBook.Domain.Entities.Media", null)
+                        .WithMany("MediaCategories")
+                        .HasForeignKey("MediaId");
                 });
 
             modelBuilder.Entity("LibraryBook.Domain.Entities.Menu", b =>
@@ -914,17 +892,6 @@ namespace LibraryBook.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Villa");
-                });
-
-            modelBuilder.Entity("LibraryBook.Domain.Entities.WidgetContent", b =>
-                {
-                    b.HasOne("LibraryBook.Domain.Entities.WidgetContentCategory", "WidgetContentCategory")
-                        .WithMany()
-                        .HasForeignKey("WidgetContentCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WidgetContentCategory");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -976,6 +943,11 @@ namespace LibraryBook.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LibraryBook.Domain.Entities.Media", b =>
+                {
+                    b.Navigation("MediaCategories");
                 });
 
             modelBuilder.Entity("LibraryBook.Domain.Entities.Villa", b =>

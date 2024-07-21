@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" />
-    <link rel="stylesheet" href="~/Admin/css/adminlte.css"><!--end::Required Plugin(AdminLTE)-->
+    <link rel="stylesheet" href="~/Admin/css/adminlte.css">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script><!--end::Required Plugin(AdminLTE)-->
 </head> <!--end::Head--> <!--begin::Body-->
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -49,11 +50,12 @@
                                 <img src="/Admin/assets/img/AdminLTELogo.png" class="rounded-circle shadow" alt="User Image">
                                 <p>
                                     <small>Hello</small>
-                                    @UserManager.GetUserName(User)                                    
+                                    @UserManager.GetUserName(User)
                                 </p>
                             </li> <!--end::User Image--> <!--begin::Menu Body-->
 
-                            <li class="user-footer"> <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            <li class="user-footer">
+                                <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 <a asp-controller="Account" asp-action="Logout" class="btn btn-default btn-flat float-end">Sign out</a>
                             </li> <!--end::Menu Footer-->
                         </ul>
@@ -109,13 +111,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../docs/javascript/treeview.html" class="nav-link">
+                                    <a asp-controller="BannerCategory" asp-action="Index" class="nav-link">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Banner Category</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../docs/javascript/treeview.html" class="nav-link">
+                                    <a asp-controller="Banner" asp-action="Index" class="nav-link">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Banner Management</p>
                                     </a>
@@ -210,8 +212,8 @@
         <footer class="app-footer">
             <!--begin::To the end-->
             <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
-                Copyright &copy; 2014-2024&nbsp;
-                <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+                Copyright &copy; @DateTime.Now.Year&nbsp;
+                <a href="#" class="text-decoration-none">Phate</a>.
             </strong>
             All rights reserved.
             <!--end::Copyright-->
@@ -220,8 +222,10 @@
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script> <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="~/Admin/js/adminlte.js"></script>
+    
     <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js" asp-append-version="true"></script>
-    <script src="~/Admin/js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
         const Default = {

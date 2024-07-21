@@ -16,6 +16,8 @@ namespace LibraryBook.Application.Common.Interfaces
         IWebsiteInfomationRepository WebsiteInfomation { get; }
         IMenuRepository Menu { get; }
         IMenuCategoryRepository MenuCategory { get; }
+        IBannerRepository Banner { get; }
+        IBannerCategoryRepository BannerCategory { get; }
         void Save();
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,11 @@ namespace LibraryBook.Domain.Entities
         public string MediaLink { get; set; }
         public int Order { get; set; }
         public bool IsActive { get; set; }
-        
+        [ForeignKey(nameof(MediaCategory))]
+        public int MediaCategoryId { get; set; }
+
         [ValidateNever]
-        public IEnumerable<MediaCategory> MediaCategories { get; set; }
+        public MediaCategory MediaCategory { get; set; }
 
     }
 }

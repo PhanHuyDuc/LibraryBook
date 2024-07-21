@@ -22,8 +22,11 @@ namespace LibraryBook.Domain.Entities
         public string? BannerLink { get; set; }
         public int Order { get; set; }
         public bool IsActive { get; set; }
+        [ForeignKey(nameof(BannerCategory))]
+        public int BannerCategoryId { get; set; }
+        
         [ValidateNever]
-        public IEnumerable<BannerCategory> BannerCategories { get; set; }
+        public BannerCategory BannerCategory { get; set; }
 
     }
 }

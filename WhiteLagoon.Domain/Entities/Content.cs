@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,7 +24,9 @@ namespace LibraryBook.Domain.Entities
         public bool IsAcive { get; set; }
         public bool IsSpecial { get; set; }
         public bool Approved { get; set; }
-        [NotMapped]
-        public IEnumerable<ContentCategory> ContentCategories { get; set; }
+        [ForeignKey(nameof(ContentCategory))]
+        public int ContentCategoryId { get; set; }
+        [ValidateNever]
+        public ContentCategory ContentCategory { get; set; }
     }
 }

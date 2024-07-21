@@ -28,6 +28,8 @@ builder.Services.AddScoped<IBookingService,BookingService>();
 builder.Services.AddScoped<IWebsiteInfomationService,WebsiteInfomationService>();
 builder.Services.AddScoped<IMenuCategoryService,MenuCategoryService>();
 builder.Services.AddScoped<IMenuService,MenuService>();
+builder.Services.AddScoped<IBannerCategoryService,BannerCategoryService>();
+builder.Services.AddScoped<IBannerService,BannerService>();
 
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.ConfigureApplicationCookie(option =>

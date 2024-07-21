@@ -20,7 +20,9 @@ namespace LibraryBook.Infrastructure.Repositoty
         public IApplicationUserRepository User { get; private set; }
         public IWebsiteInfomationRepository WebsiteInfomation { get; private set; }
         public IMenuRepository Menu { get; private set; }
+        public IBannerRepository Banner { get; private set; }
         public IMenuCategoryRepository MenuCategory { get; private set; }
+        public IBannerCategoryRepository BannerCategory { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -33,6 +35,8 @@ namespace LibraryBook.Infrastructure.Repositoty
             WebsiteInfomation = new WebsiteInfomationRepository(_db);
             Menu = new MenuRepository(_db);
             MenuCategory = new MenuCategoryRepository(_db);
+            Banner = new BannerRepository(_db);
+            BannerCategory = new BannerCategoryRepository(_db);
         }
 
         public void Save()
