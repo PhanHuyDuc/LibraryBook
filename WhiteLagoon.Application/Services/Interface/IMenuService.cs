@@ -14,5 +14,6 @@ namespace LibraryBook.Application.Services.Interface
         void CreateMenu(Menu menu);
         void UpdateMenu(Menu menu);
         bool DeleteMenu(int id);
+        IEnumerable<Menu> GetMenuByCategory(string menuCategory);
     }
 }

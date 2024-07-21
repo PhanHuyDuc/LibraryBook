@@ -51,6 +51,11 @@ namespace LibraryBook.Application.Services.Implementation
            return _unitOfWork.Menu.GetAll(includeProperties:"MenuCategory");
         }
 
+        public IEnumerable<Menu> GetMenuByCategory(string menuCategory)
+        {
+            return _unitOfWork.Menu.GetAll(includeProperties: "MenuCategory").Where(u=>u.MenuCategory.Name == menuCategory);
+        }
+
         public Menu GetMenuById(int id)
         {
             return _unitOfWork.Menu.Get(u=>u.Id == id, includeProperties: "MenuCategory");

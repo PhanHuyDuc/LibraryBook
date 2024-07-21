@@ -19,7 +19,7 @@ namespace LibraryBook.Web.Controllers
         }
         public IActionResult Index()
         {
-            var menus = _menuService.GetAllMenu();
+            var menus = _menuService.GetAllMenu().OrderBy(u => u.MenuParentName);
             return View(menus);
         }
         public IActionResult Create()
@@ -62,8 +62,12 @@ namespace LibraryBook.Web.Controllers
                     if (parentMenu != null)
                     {
                         obj.Menu.MenuParentName = parentMenu.MenuName;
+                        obj.Menu.TreeView = parentMenu.TreeView + 1;                       
                     }
-
+                }
+                else
+                {
+                    obj.Menu.TreeView = 1;                    
                 }
                 obj.Menu.IsActive = true;
                 _menuService.CreateMenu(obj.Menu);
@@ -163,8 +167,13 @@ namespace LibraryBook.Web.Controllers
                     if (parentMenu != null)
                     {
                         menuVM.Menu.MenuParentName = parentMenu.MenuName;
+                        menuVM.Menu.TreeView = parentMenu.TreeView + 1;
                     }
-                }
+                    else
+                    {
+                        menuVM.Menu.TreeView = 1;
+                    }
+                }                
                 menuVM.Menu.IsActive = true;
                 _menuService.UpdateMenu(menuVM.Menu);
                 TempData["success"] = "Updated successfully";
