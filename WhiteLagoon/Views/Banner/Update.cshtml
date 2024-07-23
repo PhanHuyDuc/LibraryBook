@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-floating py-1 col-12">
                     <input type="text" asp-for="@Model.Banner.BannerImageUrl" hidden class="form-control border shadow" />
-                    <input type="file" asp-for="@Model.Banner.BannerImage" class="form-control border shadow" />
+                    <input type="file" asp-for="@Model.Banner.BannerImage" class="form-control border shadow" accept="image/jpg,image/jpeg,image/png" />
                     <label class="ms-2" asp-for="@Model.Banner.BannerImageUrl">ImageUrl</label>
                     <span asp-validation-for="@Model.Banner.BannerImageUrl" class="text-danger"></span>
                 </div>

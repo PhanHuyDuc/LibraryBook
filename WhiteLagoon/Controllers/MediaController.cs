@@ -52,7 +52,7 @@ namespace LibraryBook.Web.Controllers
             TempData["error"] = "Create failed";
             return View(obj);
         }
-        public IActionResult Update(int MediaId)
+        public IActionResult Update(int mediaId)
         {
 
             MediaVM mediaVM = new()
@@ -62,7 +62,7 @@ namespace LibraryBook.Web.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
-                Media = _mediaService.GetMediaById(MediaId)
+                Media = _mediaService.GetMediaById(mediaId)
             };
             if (mediaVM == null)
             {

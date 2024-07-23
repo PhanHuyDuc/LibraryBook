@@ -1,0 +1,68 @@
+﻿@model MediaVM
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-white py-2">Delete Media</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 text-center">
+        <iframe width="560" height="315" src="@Model.Media.MediaImageUrl" frameborder="0" allow="accelerometer;encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="card-body border p-4">
+        <form class="row" method="post" enctype="multipart/form-data">
+            <input asp-for="Media.Id" hidden />
+            <div class="p-3">
+                <div class="form-floating py-1 col-12">
+                    <select class="form-select border shadow" asp-for="@Model.Media.MediaCategoryId" asp-items="@Model.MediaCategoryList" disabled>
+                        <option disabled selected>--Select Media Category--</option>
+                    </select>
+                    <label class="ms-2" asp-for="Media.MediaCategoryId">Menu Category</label>
+                    <span asp-validation-for="Media.MediaCategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="@Model.Media.Name" class="form-control border shadow" disabled />
+                    <label class="ms-2" asp-for="@Model.Media.Name">Media Name</label>
+                    <span asp-validation-for="@Model.Media.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="@Model.Media.Description" class="form-control border shadow" disabled />
+                    <label class="ms-2" asp-for="@Model.Media.Description">Description</label>
+                    <span asp-validation-for="@Model.Media.Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="@Model.Media.MediaImageUrl" hidden class="form-control border shadow" />
+                    <input type="file" asp-for="@Model.Media.MediaImage" class="form-control border shadow" accept="audio/*,video/*" disabled />
+                    <label class="ms-2" asp-for="@Model.Media.MediaImageUrl">ImageUrl</label>
+                    <span asp-validation-for="@Model.Media.MediaImageUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-1 col-12">
+                    <input type="number" asp-for="@Model.Media.Order" class="form-control border shadow" value="1" disabled />
+                    <label class="ms-2" asp-for="@Model.Media.Order">Order</label>
+                    <span asp-validation-for="@Model.Media.Order" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="bi bi-check-circle"></i> Delete
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a class="btn btn-secondary w-100" asp-controller="Media" asp-action="Index">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+
+    }
+}
