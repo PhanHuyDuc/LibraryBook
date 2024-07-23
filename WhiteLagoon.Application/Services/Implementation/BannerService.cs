@@ -14,15 +14,31 @@ namespace LibraryBook.Application.Services.Implementation
     public class BannerService : IBannerService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public BannerService(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public BannerService(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
-
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        public void CreateBanner(Banner Banner)
+        public void CreateBanner(Banner banner)
         {
-            _unitOfWork.Banner.Add(Banner);
+            if (banner.BannerImage != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(banner.BannerImage.FileName);
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, @"images\BannerImage");
+
+                using var fileStream = new FileStream(Path.Combine(imagePath, fileName), FileMode.Create);
+                banner.BannerImage.CopyTo(fileStream);
+
+                banner.BannerImageUrl = @"\images\BannerImage\" + fileName;
+            }
+            else
+            {
+                banner.BannerImageUrl = "https://placehold.co/600x400";
+            }
+
+            _unitOfWork.Banner.Add(banner);
             _unitOfWork.Save();
         }
 
@@ -33,7 +49,15 @@ namespace LibraryBook.Application.Services.Implementation
                 Banner? objFromDb = _unitOfWork.Banner.Get(u => u.Id == id);
                 if (objFromDb is not null)
                 {
+                    if (!string.IsNullOrEmpty(objFromDb.BannerImageUrl))
+                    {
+                        var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, objFromDb.BannerImageUrl.TrimStart('\\'));
 
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
                     _unitOfWork.Banner.Remove(objFromDb);
                     _unitOfWork.Save();
 
@@ -61,9 +85,27 @@ namespace LibraryBook.Application.Services.Implementation
             return _unitOfWork.Banner.Get(u=>u.Id == id, includeProperties: "BannerCategory");
         }
 
-        public void UpdateBanner(Banner Banner)
+        public void UpdateBanner(Banner banner)
         {
-            _unitOfWork.Banner.Update(Banner);
+            if (banner.BannerImage != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(banner.BannerImage.FileName);
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, @"images\BannerImage");
+
+                if (!string.IsNullOrEmpty(banner.BannerImageUrl))
+                {
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, banner.BannerImageUrl.TrimStart('\\'));
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+                using var fileStream = new FileStream(Path.Combine(imagePath, fileName), FileMode.Create);
+                banner.BannerImage.CopyTo(fileStream);
+                banner.BannerImageUrl = @"\images\BannerImage\" + fileName;
+            }
+            _unitOfWork.Banner.Update(banner);
             _unitOfWork.Save();
         }
     }

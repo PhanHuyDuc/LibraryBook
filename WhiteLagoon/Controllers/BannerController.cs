@@ -52,7 +52,7 @@ namespace LibraryBook.Web.Controllers
             TempData["error"] = "Create failed";
             return View(obj);
         }
-        public IActionResult Update(int BannerId)
+        public IActionResult Update(int bannerId)
         {
 
             BannerVM bannerVM = new()
@@ -62,7 +62,7 @@ namespace LibraryBook.Web.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
-                Banner = _bannerService.GetBannerById(BannerId)
+                Banner = _bannerService.GetBannerById(bannerId)
             };
             if (bannerVM == null)
             {

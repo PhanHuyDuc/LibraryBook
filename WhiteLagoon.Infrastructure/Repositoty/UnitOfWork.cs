@@ -23,6 +23,8 @@ namespace LibraryBook.Infrastructure.Repositoty
         public IBannerRepository Banner { get; private set; }
         public IMenuCategoryRepository MenuCategory { get; private set; }
         public IBannerCategoryRepository BannerCategory { get; private set; }
+        public IMediaRepository Media { get; private set; }
+        public IMediaCategoryRepository MediaCategory { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -37,6 +39,8 @@ namespace LibraryBook.Infrastructure.Repositoty
             MenuCategory = new MenuCategoryRepository(_db);
             Banner = new BannerRepository(_db);
             BannerCategory = new BannerCategoryRepository(_db);
+            Media = new MediaRepository(_db);
+            MediaCategory = new MediaCategoryRepository(_db);
         }
 
         public void Save()

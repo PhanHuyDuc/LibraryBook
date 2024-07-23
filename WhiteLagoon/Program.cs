@@ -30,6 +30,8 @@ builder.Services.AddScoped<IMenuCategoryService,MenuCategoryService>();
 builder.Services.AddScoped<IMenuService,MenuService>();
 builder.Services.AddScoped<IBannerCategoryService,BannerCategoryService>();
 builder.Services.AddScoped<IBannerService,BannerService>();
+builder.Services.AddScoped<IMediaService,MediaService>();
+builder.Services.AddScoped<IMediaCategoryService,MediaCategoryService>();
 
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.ConfigureApplicationCookie(option =>

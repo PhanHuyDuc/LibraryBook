@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,8 +16,9 @@ namespace LibraryBook.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
-        public string? MediaImage { get; set; }
-        public string MediaLink { get; set; }
+        [NotMapped]
+        public IFormFile? MediaImage { get; set; }
+        public string? MediaImageUrl { get; set; }
         public int Order { get; set; }
         public bool IsActive { get; set; }
         [ForeignKey(nameof(MediaCategory))]

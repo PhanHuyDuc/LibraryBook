@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Banner>
+
+@{
+    foreach (var item in Model)
+    {
+        <link rel="icon" type="image/png" sizes="32x32" href="@item.BannerImageUrl">
+        <link rel="icon" type="image/x-icon" href="@item.BannerImageUrl">
+    }
+}

@@ -17,8 +17,8 @@ namespace LibraryBook.Domain.Entities
         public string Name { get; set; }
         public string? Description { get; set; }
         [NotMapped]
-        public IFormFile BannerImage { get; set; }
-        public string BannerUrl { get; set; }
+        public IFormFile? BannerImage { get; set; }
+        public string? BannerImageUrl { get; set; }
         public string? BannerLink { get; set; }
         public int Order { get; set; }
         public bool IsActive { get; set; }

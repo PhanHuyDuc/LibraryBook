@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="elFinder.Net.Core" Version="1.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -26,6 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\images\BannerImage\" />
+    <Folder Include="wwwroot\media\" />
     <Folder Include="wwwroot\images\VillaImage\" />
     <Folder Include="wwwroot\exports\" />
     <Folder Include="wwwroot\Admin\" />
