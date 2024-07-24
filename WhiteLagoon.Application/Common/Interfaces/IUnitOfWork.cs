@@ -20,6 +20,8 @@ namespace LibraryBook.Application.Common.Interfaces
         IBannerCategoryRepository BannerCategory { get; }
         IMediaRepository Media { get; }
         IMediaCategoryRepository MediaCategory { get; }
+        IContentCategoryRepository ContentCategory { get; }
+        IContentRepository Content { get; }
         void Save();
     }
 }

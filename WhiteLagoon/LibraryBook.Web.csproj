@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\BannerImage\" />
+    <Folder Include="wwwroot\images\ContentImage\" />
     <Folder Include="wwwroot\media\" />
     <Folder Include="wwwroot\images\VillaImage\" />
     <Folder Include="wwwroot\exports\" />

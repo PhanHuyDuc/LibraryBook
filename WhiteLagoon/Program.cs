@@ -32,6 +32,8 @@ builder.Services.AddScoped<IBannerCategoryService,BannerCategoryService>();
 builder.Services.AddScoped<IBannerService,BannerService>();
 builder.Services.AddScoped<IMediaService,MediaService>();
 builder.Services.AddScoped<IMediaCategoryService,MediaCategoryService>();
+builder.Services.AddScoped<IContentCategoryService,ContentCategoryService>();
+builder.Services.AddScoped<IContentService,ContentService>();
 
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.ConfigureApplicationCookie(option =>

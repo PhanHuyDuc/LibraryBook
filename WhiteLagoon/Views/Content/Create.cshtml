@@ -1,0 +1,85 @@
+﻿@model ContentVM
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-white py-2">Create Content</h1>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form class="row" method="post" enctype="multipart/form-data">
+            <div class="p-3">
+                <div class="form-floating py-1 col-12">
+                    <select class="form-select border shadow" asp-for="@Model.Content.ContentCategoryId" asp-items="@Model.ContentCategoryList">
+                        <option disabled selected>--Select Content Category--</option>
+                    </select>
+                    <label class="ms-2" asp-for="Content.ContentCategoryId">Menu Category</label>
+                    <span asp-validation-for="Content.ContentCategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="@Model.Content.Name" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="@Model.Content.Name">Content Name</label>
+                    <span asp-validation-for="@Model.Content.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="@Model.Content.ContentAvata" hidden class="form-control border shadow" />
+                    <input type="file" asp-for="@Model.Content.Avata" class="form-control border shadow" accept="image/jpg,image/jpeg,image/png" />
+                    <label class="ms-2" asp-for="@Model.Content.ContentAvata">Content Avata</label>
+                    <span asp-validation-for="@Model.Content.ContentAvata" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    @* <input type="text" asp-for="@Model.Content.ShortDes" class="form-control border shadow" /> *@
+                    <textarea class="form-control border shadow" asp-for="@Model.Content.ShortDes" id="ShortDes"></textarea>
+                    <label class="ms-2" style="margin-left:100rem !important" asp-for="@Model.Content.ShortDes">Short Description</label>
+                    <span asp-validation-for="@Model.Content.ShortDes" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    @* <input type="text" asp-for="@Model.Content.Description" class="form-control border shadow" /> *@
+                    <textarea class="form-control border shadow" asp-for="@Model.Content.Description" id="Description"></textarea>
+                    <label class="ms-2" style="margin-left:100rem !important" asp-for="@Model.Content.Description">Description</label>
+                    <span asp-validation-for="@Model.Content.Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="@Model.Content.Author" class="form-control border shadow" />
+                    <label class="ms-2"  asp-for="@Model.Content.Author">Author</label>
+                    <span asp-validation-for="@Model.Content.Author" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="@Model.Content.ContentSource" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="@Model.Content.ContentSource">Source</label>
+                    <span asp-validation-for="@Model.Content.ContentSource" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="date" asp-for="@Model.Content.Updated_Date" class="form-control border shadow" />
+                    <input type="text" asp-for="@Model.Content.Created_Date" class="form-control border shadow" hidden value="@DateOnly.FromDateTime(DateTime.Now)" />
+                    <label class="ms-2" asp-for="@Model.Content.Updated_Date">Date</label>
+                    <span asp-validation-for="@Model.Content.Updated_Date" class="text-danger"></span>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="@Model.Content.IsSpecial">
+                    <label class="form-check-label" asp-for="@Model.Content.IsSpecial">Is Special</label>
+                </div>
+                <div class="row pt-2">
+
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-circle"></i> Create
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a class="btn btn-secondary w-100" asp-controller="Content" asp-action="Index">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/js/tinymce.js"></script>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />        
+    }
+}
