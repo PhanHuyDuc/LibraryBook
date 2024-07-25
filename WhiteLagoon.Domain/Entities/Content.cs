@@ -32,5 +32,10 @@ namespace LibraryBook.Domain.Entities
         public int ContentCategoryId { get; set; }
         [ValidateNever]
         public ContentCategory ContentCategory { get; set; }
+        [ValidateNever]
+        public List<ContentImage>? ContentImage { get; set; }
+        [NotMapped]
+        public List<IFormFile>? files { get; set; }
+
     }
 }

@@ -25,6 +25,7 @@ namespace LibraryBook.Infrastructure.Data
         public DbSet<Banner> Banners { get; set; }
         public DbSet<BannerCategory> BannerCategories { get; set; }
         public DbSet<Content> Contents { get; set; }
+        public DbSet<ContentImage> ContentImages { get; set; }
         public DbSet<ContentCategory> ContentCategories { get; set; }
         public DbSet<WidgetContentCategory> WidgetContentCategories { get; set; }
         public DbSet<WidgetContent> WidgetContents { get; set; }

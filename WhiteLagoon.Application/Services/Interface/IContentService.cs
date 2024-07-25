@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LibraryBook.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace LibraryBook.Application.Services.Interface
 {

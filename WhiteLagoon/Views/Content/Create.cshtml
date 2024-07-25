@@ -28,6 +28,12 @@
                     <label class="ms-2" asp-for="@Model.Content.ContentAvata">Content Avata</label>
                     <span asp-validation-for="@Model.Content.ContentAvata" class="text-danger"></span>
                 </div>
+                <div class="form-floating py-1 col-12">         
+                    <input type="text" asp-for="@Model.Content.ContentImage" hidden class="form-control border shadow" />
+                    <input type="file" asp-for="@Model.Content.files" class="form-control border shadow" accept="image/jpg,image/jpeg,image/png" multiple />
+                    <label class="ms-2" asp-for="@Model.Content.ContentImage">Content MultiImage</label>
+                    <span asp-validation-for="@Model.Content.ContentImage" class="text-danger"></span>
+                </div>
                 <div class="form-floating py-1 col-12">
                     @* <input type="text" asp-for="@Model.Content.ShortDes" class="form-control border shadow" /> *@
                     <textarea class="form-control border shadow" asp-for="@Model.Content.ShortDes" id="ShortDes"></textarea>
