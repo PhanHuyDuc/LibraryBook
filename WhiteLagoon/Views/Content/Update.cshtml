@@ -9,7 +9,8 @@
     </div>
     <div class="card-body border p-4">
         <form class="row" method="post" enctype="multipart/form-data">
-            <div class="p-3">
+            <input asp-for="Content.Id" hidden/>
+            <div class="p-3 col-10">
                 <div class="form-floating py-1 col-12">
                     <select class="form-select border shadow" asp-for="@Model.Content.ContentCategoryId" asp-items="@Model.ContentCategoryList">
                         <option disabled selected>--Select Content Category--</option>
@@ -28,7 +29,7 @@
                     <label class="ms-2" asp-for="@Model.Content.ContentAvata">Content Avata</label>
                     <span asp-validation-for="@Model.Content.ContentAvata" class="text-danger"></span>
                 </div>
-                <div class="form-floating py-1 col-12">         
+                <div class="form-floating py-1 col-12">
                     <input type="text" asp-for="@Model.Content.ContentImage" hidden class="form-control border shadow" />
                     <input type="file" asp-for="@Model.Content.files" class="form-control border shadow" accept="image/jpg,image/jpeg,image/png" multiple />
                     <label class="ms-2" asp-for="@Model.Content.ContentImage">Content MultiImage</label>
@@ -37,18 +38,18 @@
                 <div class="form-floating py-1 col-12">
                     @* <input type="text" asp-for="@Model.Content.ShortDes" class="form-control border shadow" /> *@
                     <textarea class="form-control border shadow" asp-for="@Model.Content.ShortDes" id="ShortDes"></textarea>
-                    <label class="ms-2" style="margin-left:100rem !important" asp-for="@Model.Content.ShortDes">Short Description</label>
+                    <label class="ms-2" style="margin-left:82rem !important" asp-for="@Model.Content.ShortDes">Short Description</label>
                     <span asp-validation-for="@Model.Content.ShortDes" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
                     @* <input type="text" asp-for="@Model.Content.Description" class="form-control border shadow" /> *@
                     <textarea class="form-control border shadow" asp-for="@Model.Content.Description" id="Description"></textarea>
-                    <label class="ms-2" style="margin-left:100rem !important" asp-for="@Model.Content.Description">Description</label>
+                    <label class="ms-2" style="margin-left:85rem !important" asp-for="@Model.Content.Description">Description</label>
                     <span asp-validation-for="@Model.Content.Description" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
                     <input type="text" asp-for="@Model.Content.Author" class="form-control border shadow" />
-                    <label class="ms-2"  asp-for="@Model.Content.Author">Author</label>
+                    <label class="ms-2" asp-for="@Model.Content.Author">Author</label>
                     <span asp-validation-for="@Model.Content.Author" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
@@ -70,7 +71,7 @@
 
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-check-circle"></i> Create
+                            <i class="bi bi-check-circle"></i> Update
                         </button>
                     </div>
                     <div class="col-6 col-md-3">
@@ -80,12 +81,27 @@
                     </div>
                 </div>
             </div>
+            <div class="col-2">
+                <div class="col-2">
+                    <label>Đây là ảnh Avatar</label>
+                    <img src="@Model.Content.ContentAvata" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" alt="Images" />
+                    <label>Đây là ảnh Multi</label>                    
+                    @if (Model.Content.ContentImage != null)
+                    {
+                        @foreach (var item in Model.Content.ContentImage)
+                        {
+                            <img src="@item.MultiImage" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" alt="Images" />
+                            <a asp-action="DeleteImage" class="btn btn-danger" asp-route-contentId="@item.ContentId" asp-route-imageId="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                        }
+                    }
+                </div>
+            </div>
         </form>
     </div>
 </div>
 <script src="~/js/tinymce.js"></script>
 @section Scripts {
     @{
-        <partial name="_ValidationScriptsPartial" />        
+        <partial name="_ValidationScriptsPartial" />
     }
 }

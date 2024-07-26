@@ -52,7 +52,8 @@ namespace LibraryBook.Web.Controllers
             TempData["error"] = "Create failed";
             return View(obj);
         }
-        public IActionResult Update(int contentId)
+       
+        public IActionResult Update(int contentId) 
         {
 
             ContentVM contentVM = new()
@@ -62,6 +63,7 @@ namespace LibraryBook.Web.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
+                
                 Content = _contentService.GetContentById(contentId)
             };
             if (contentVM == null)
@@ -72,6 +74,7 @@ namespace LibraryBook.Web.Controllers
         }
 
         [HttpPost]
+        
         public IActionResult Update(ContentVM contentVM)
         {
             contentVM.ContentCategoryList = _contentCategoryService.GetAllContentCategory().Select(u => new SelectListItem
@@ -132,6 +135,16 @@ namespace LibraryBook.Web.Controllers
                 _contentService.UpdateContent(content);
             }
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult DeleteImage(int imageId, int contentId)
+        {
+            Content? content = _contentService.GetContentById(contentId);
+            if (content is not null)
+            {                
+                _contentService.DeleteImage(imageId);
+            }
+            return RedirectToAction(nameof(Update), new {contentId = contentId });
+
         }
     }
 }

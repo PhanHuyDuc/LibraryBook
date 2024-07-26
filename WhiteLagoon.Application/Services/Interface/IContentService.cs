@@ -16,5 +16,6 @@ namespace LibraryBook.Application.Services.Interface
         void UpdateContent(Content content);
         bool DeleteContent(int id);
         IEnumerable<Content> GetContentByCategory(string contentCategory);
+        void DeleteImage(int imageId);
     }
 }

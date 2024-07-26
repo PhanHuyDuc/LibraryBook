@@ -6,7 +6,7 @@ namespace LibraryBook.Web.ViewModels
 {
     public class ContentVM
     {
-        public Content? Content { get; set; }       
+        public Content Content { get; set; }       
         [ValidateNever]
         public IEnumerable<SelectListItem>? ContentCategoryList { get; set; }
        
