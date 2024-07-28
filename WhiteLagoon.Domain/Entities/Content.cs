@@ -27,6 +27,9 @@ namespace LibraryBook.Domain.Entities
         public DateOnly? Created_Date { get; set; }
         public DateOnly? Updated_Date { get; set; }
         public bool IsActive { get; set; }
+        public int? ViewCount { get; set; }
+        public int? Heart { get; set; }
+        public int? BookMark { get; set; }
         public bool IsSpecial { get; set; }       
         [ForeignKey(nameof(ContentCategory))]
         public int ContentCategoryId { get; set; }

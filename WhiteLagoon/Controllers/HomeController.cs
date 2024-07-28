@@ -55,7 +55,11 @@ namespace LibraryBook.Controllers
         {
             return View();
         }
-
+        [Route("about")]
+        public IActionResult About()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult GeneratePPTExport(int id)
         {

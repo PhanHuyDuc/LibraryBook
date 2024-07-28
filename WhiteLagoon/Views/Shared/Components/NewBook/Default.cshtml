@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Content>
+@{
+    foreach (var item in Model)
+    {
+        <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+            <div class="team-thumb bg-white shadow-lg">
+                <img src="@item.ContentAvata"
+                     class="about-image img-fluid" alt="">
+
+                <div class="team-info">
+                    <h4 class="mb-2">
+                        @item.Author
+                        <img src="/images/verified.png" class="verified-image img-fluid" alt="">
+                    </h4>
+                    <!--
+                    <span class="badge">Modeling</span>
+
+                    <span class="badge">Fashion</span>
+                    -->
+                </div>
+
+                <div class="social-share">
+                    <ul class="social-icon">
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-twitter"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-facebook"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-pinterest"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+
+@* <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+    <div class="team-thumb bg-white shadow-lg">
+        <img src="images/profile/handsome-asian-man-listening-music-through-headphones.jpg"
+             class="about-image img-fluid" alt="">
+
+        <div class="team-info">
+            <h4 class="mb-2">
+                William
+                <img src="images/verified.png" class="verified-image img-fluid" alt="">
+            </h4>
+
+            <span class="badge">Creative</span>
+
+            <span class="badge">Design</span>
+        </div>
+
+        <div class="social-share">
+            <ul class="social-icon">
+                <li class="social-icon-item">
+                    <a href="#" class="social-icon-link bi-twitter"></a>
+                </li>
+
+                <li class="social-icon-item">
+                    <a href="#" class="social-icon-link bi-facebook"></a>
+                </li>
+
+                <li class="social-icon-item">
+                    <a href="#" class="social-icon-link bi-pinterest"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-0">
+    <div class="team-thumb bg-white shadow-lg">
+        <img src="images/profile/smart-attractive-asian-glasses-male-standing-smile-with-freshness-joyful-casual-blue-shirt-portrait-white-background.jpg"
+             class="about-image img-fluid" alt="">
+
+        <div class="team-info">
+            <h4 class="mb-2">
+                Chan
+                <img src="images/verified.png" class="verified-image img-fluid" alt="">
+            </h4>
+
+            <span class="badge">Education</span>
+        </div>
+
+        <div class="social-share">
+            <ul class="social-icon">
+                <li class="social-icon-item">
+                    <a href="#" class="social-icon-link bi-linkedin"></a>
+                </li>
+
+                <li class="social-icon-item">
+                    <a href="#" class="social-icon-link bi-whatsapp"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-6 col-12">
+    <div class="team-thumb bg-white shadow-lg">
+        <img src="images/profile/smiling-business-woman-with-folded-hands-against-white-wall-toothy-smile-crossed-arms.jpg"
+             class="about-image img-fluid" alt="">
+
+        <div class="team-info">
+            <h4 class="mb-2">
+                Candice
+                <img src="images/verified.png" class="verified-image img-fluid" alt="">
+            </h4>
+
+            <span class="badge">Storytelling</span>
+
+            <span class="badge">Business</span>
+        </div>
+
+        <div class="social-share">
+            <ul class="social-icon">
+                <li class="social-icon-item">
+                    <a href="#" class="social-icon-link bi-twitter"></a>
+                </li>
+
+                <li class="social-icon-item">
+                    <a href="#" class="social-icon-link bi-facebook"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div> *@

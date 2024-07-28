@@ -4,6 +4,7 @@ using LibraryBook.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryBook.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240728151251_AddViewCountContentToDb")]
+    partial class AddViewCountContentToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,9 +280,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("BookMark")
-                        .HasColumnType("int");
-
                     b.Property<string>("ContentAvata")
                         .HasColumnType("nvarchar(max)");
 
@@ -302,9 +302,6 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<string>("Description3")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Heart")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -321,7 +318,7 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<DateOnly?>("Updated_Date")
                         .HasColumnType("date");
 
-                    b.Property<int?>("ViewCount")
+                    b.Property<int>("ViewCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -457,7 +454,7 @@ namespace LibraryBook.Infrastructure.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TreeView")
+                    b.Property<int>("TreeView")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

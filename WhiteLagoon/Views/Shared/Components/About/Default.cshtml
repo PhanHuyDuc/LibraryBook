@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WidgetContent>
+@{
+    foreach (var item in Model)
+    {
+       @Html.Raw(item.Description)
+    }
+}
+

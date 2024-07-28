@@ -26,6 +26,7 @@ namespace LibraryBook.Application.Services.Implementation
         public void CreateContent(Content content)
         {
             string wwwRoothPath = _webHostEnvironment.WebRootPath;
+
             if (content.Avata != null)
             {
                 string fileName = Guid.NewGuid().ToString() + Path.GetExtension(content.Avata.FileName);
@@ -39,6 +40,10 @@ namespace LibraryBook.Application.Services.Implementation
             else
             {
                 content.ContentAvata = "https://placehold.co/600x400";
+            }
+            if (content.Updated_Date == null)
+            {
+                content.Updated_Date = DateOnly.FromDateTime(DateTime.Now);
             }
             _unitOfWork.Content.Add(content);
             _unitOfWork.Save();

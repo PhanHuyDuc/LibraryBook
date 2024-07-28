@@ -57,7 +57,7 @@
                     <span asp-validation-for="@Model.Content.ContentSource" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input type="date" asp-for="@Model.Content.Updated_Date" class="form-control border shadow" />
+                    <input type="date" asp-for="@Model.Content.Updated_Date" class="form-control border shadow" value="@DateOnly.FromDateTime(DateTime.Now)" />
                     <input type="text" asp-for="@Model.Content.Created_Date" class="form-control border shadow" hidden value="@DateOnly.FromDateTime(DateTime.Now)" />
                     <label class="ms-2" asp-for="@Model.Content.Updated_Date">Date</label>
                     <span asp-validation-for="@Model.Content.Updated_Date" class="text-danger"></span>
@@ -69,7 +69,7 @@
                 <div class="row pt-2">
 
                     <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-success w-100">
+                        <button type="submit" class="btn btn-success w-100" id="btn-create" @* onclick="disableButton(this)" *@>
                             <i class="bi bi-check-circle"></i> Create
                         </button>
                     </div>
@@ -89,3 +89,11 @@
         <partial name="_ValidationScriptsPartial" />        
     }
 }
+@* 
+<script>
+    function disableButton(button) {
+        button.disabled = true;
+        // Optionally, change the button text or add a spinner to indicate processing
+        button.innerHTML = '<i class="bi bi-check-circle"></i> Creating...';
+    }
+</script> *@

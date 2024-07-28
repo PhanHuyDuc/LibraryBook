@@ -28,6 +28,8 @@ namespace LibraryBook.Infrastructure.Repositoty
         public IContentCategoryRepository ContentCategory { get; private set; }
         public IContentRepository Content { get; private set; }
         public IContentImageRepository ContentImage { get; private set; }
+        public IWidgetContentRepository WidgetContent { get; private set; }
+        public IWidgetContentCategoryRepository WidgetContentCategory { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -47,6 +49,8 @@ namespace LibraryBook.Infrastructure.Repositoty
             ContentCategory = new ContentCategoryRepository(_db);
             Content = new ContentRepository(_db);
             ContentImage = new ContentImageRepository(_db);
+            WidgetContent = new WidgetContentRepository(_db);
+            WidgetContentCategory = new WidgetContentCategoryRepository(_db);
         }
 
         public void Save()

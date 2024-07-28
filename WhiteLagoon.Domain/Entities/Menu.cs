@@ -18,12 +18,12 @@ namespace LibraryBook.Domain.Entities
         public string MenuName { get; set; }
         public string? MenuLink { get; set; }
         public int Order { get; set; }
-        public int TreeView { get; set; }
+        public int? TreeView { get; set; }
         public bool IsActive { get; set; }       
         [ForeignKey("MenuCategory")]
         public int MenuCategoryId { get; set; }
         
         [ValidateNever]
-        public MenuCategory MenuCategory { get; set; }
+        public MenuCategory? MenuCategory { get; set; }
     }
 }

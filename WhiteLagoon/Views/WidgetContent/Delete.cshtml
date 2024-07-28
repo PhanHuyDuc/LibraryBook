@@ -1,0 +1,57 @@
+﻿@model WidgetContentVM
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-white py-2">Create WidgetContent</h1>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form class="row" method="post" enctype="multipart/form-data">
+            <input asp-for="@Model.WidgetContent.Id" />
+            <div class="p-3">
+                <div class="form-floating py-1 col-12">
+                    <select class="form-select border shadow" asp-for="@Model.WidgetContent.WidgetContentCategoryId" asp-items="@Model.WidgetContentCategoryList">
+                        <option disabled selected>--Select WidgetContent Category--</option>
+                    </select>
+                    <label class="ms-2" asp-for="WidgetContent.WidgetContentCategoryId">WidgetContent Category</label>
+                    <span asp-validation-for="WidgetContent.WidgetContentCategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="text" asp-for="@Model.WidgetContent.Name" class="form-control border shadow" />
+                    <label class="ms-2" asp-for="@Model.WidgetContent.Name">WidgetContent Name</label>
+                    <span asp-validation-for="@Model.WidgetContent.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <textarea class="form-control border shadow" asp-for="@Model.WidgetContent.Description" id="Description"></textarea>
+                    <label class="ms-2" style="margin-left:100rem !important" asp-for="@Model.WidgetContent.Description">Description</label>
+                    <span asp-validation-for="@Model.WidgetContent.Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input type="number" asp-for="@Model.WidgetContent.Order" class="form-control border shadow" value="1" />
+                    <label class="ms-2" asp-for="@Model.WidgetContent.Order">Order</label>
+                    <span asp-validation-for="@Model.WidgetContent.Order" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="bi bi-check-circle"></i> Delete
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a class="btn btn-secondary w-100" asp-controller="WidgetContent" asp-action="Index">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/js/tinymcereadonly.js"></script>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

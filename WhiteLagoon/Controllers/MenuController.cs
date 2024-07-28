@@ -111,7 +111,7 @@ namespace LibraryBook.Web.Controllers
                     Value = u.Id.ToString()
                 }),
 
-                MenuParentList = _menuService.GetAllMenu().Select(u =>
+                MenuParentList = _menuService.GetAllMenu().Where(u=>u.Id != menuId).Select(u =>
                 {
 
                     var text = u.MenuName;
@@ -169,11 +169,11 @@ namespace LibraryBook.Web.Controllers
                     {
                         menuVM.Menu.MenuParentName = parentMenu.MenuName;
                         menuVM.Menu.TreeView = parentMenu.TreeView + 1;
-                    }
-                    else
-                    {
-                        menuVM.Menu.TreeView = 1;
-                    }
+                    }                    
+                }
+                else
+                {
+                    menuVM.Menu.TreeView = 1;
                 }
                 menuVM.Menu.IsActive = true;
                 _menuService.UpdateMenu(menuVM.Menu);
