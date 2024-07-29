@@ -60,6 +60,12 @@ namespace LibraryBook.Controllers
         {
             return View();
         }
+        [Route("contactus")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult GeneratePPTExport(int id)
         {

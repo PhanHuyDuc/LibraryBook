@@ -27,6 +27,7 @@ namespace LibraryBook.Infrastructure.Repositoty
         public IMediaCategoryRepository MediaCategory { get; private set; }
         public IContentCategoryRepository ContentCategory { get; private set; }
         public IContentRepository Content { get; private set; }
+        public IContactRepository Contact { get; private set; }
         public IContentImageRepository ContentImage { get; private set; }
         public IWidgetContentRepository WidgetContent { get; private set; }
         public IWidgetContentCategoryRepository WidgetContentCategory { get; private set; }
@@ -48,6 +49,7 @@ namespace LibraryBook.Infrastructure.Repositoty
             MediaCategory = new MediaCategoryRepository(_db);
             ContentCategory = new ContentCategoryRepository(_db);
             Content = new ContentRepository(_db);
+            Contact = new ContactRepository(_db);
             ContentImage = new ContentImageRepository(_db);
             WidgetContent = new WidgetContentRepository(_db);
             WidgetContentCategory = new WidgetContentCategoryRepository(_db);

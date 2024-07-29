@@ -146,5 +146,11 @@ namespace LibraryBook.Web.Controllers
             return RedirectToAction(nameof(Update), new {contentId = contentId });
 
         }
+
+        public IActionResult ContentList()
+        {
+            var contents = _contentService.GetAllContent();
+            return View(contents);
+        }
     }
 }

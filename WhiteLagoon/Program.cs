@@ -34,6 +34,7 @@ builder.Services.AddScoped<IMediaService,MediaService>();
 builder.Services.AddScoped<IMediaCategoryService,MediaCategoryService>();
 builder.Services.AddScoped<IContentCategoryService,ContentCategoryService>();
 builder.Services.AddScoped<IContentService,ContentService>();
+builder.Services.AddScoped<IContactService,ContactService>();
 builder.Services.AddScoped<IWidgetContentCategoryService, WidgetContentCategoryService>();
 builder.Services.AddScoped<IWidgetContentService, WidgetContentService>();
 

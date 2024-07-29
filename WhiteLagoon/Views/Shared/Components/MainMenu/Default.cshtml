@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Menu>
 <div class="container">
     <a class="navbar-brand me-lg-5 me-0" href="/">
-        <img src="~/assets/images/pod-talk-logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
+        <img src="~/images/Logo Library Book.png" class="logo-image img-fluid" style="border-radius:80%" alt="templatemo pod talk">
     </a>
     <form action="#" method="get" class="custom-form search-form flex-fill me-3" role="search">
         <div class="input-group input-group-lg">
@@ -28,7 +28,7 @@
                     if (obj_1.Count > 0 && item.TreeView == 1)
                     {
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
+                            <a class="nav-link dropdown-toggle" href="@item.MenuLink" id="navbarLightDropdownMenuLink" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">@item.MenuName</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">

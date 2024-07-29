@@ -22,6 +22,7 @@ namespace LibraryBook.Application.Common.Interfaces
         IMediaCategoryRepository MediaCategory { get; }
         IContentCategoryRepository ContentCategory { get; }
         IContentRepository Content { get; }
+        IContactRepository Contact { get; }
         IContentImageRepository ContentImage { get; }
         IWidgetContentRepository WidgetContent { get; }
         IWidgetContentCategoryRepository WidgetContentCategory { get; }

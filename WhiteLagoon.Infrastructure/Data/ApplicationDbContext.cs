@@ -29,6 +29,7 @@ namespace LibraryBook.Infrastructure.Data
         public DbSet<ContentCategory> ContentCategories { get; set; }
         public DbSet<WidgetContentCategory> WidgetContentCategories { get; set; }
         public DbSet<WidgetContent> WidgetContents { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

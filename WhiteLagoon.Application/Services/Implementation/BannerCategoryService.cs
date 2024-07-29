@@ -20,9 +20,9 @@ namespace LibraryBook.Application.Services.Implementation
 
         }
 
-        public void CreateBannerCategory(BannerCategory BannerCategory)
+        public void CreateBannerCategory(BannerCategory bannerCategory)
         {
-            _unitOfWork.BannerCategory.Add(BannerCategory);
+            _unitOfWork.BannerCategory.Add(bannerCategory);
             _unitOfWork.Save();
         }
 
@@ -56,9 +56,9 @@ namespace LibraryBook.Application.Services.Implementation
             return _unitOfWork.BannerCategory.Get(u=>u.Id == id);
         }
 
-        public void UpdateBannerCategory(BannerCategory BannerCategory)
+        public void UpdateBannerCategory(BannerCategory bannerCategory)
         {
-            _unitOfWork.BannerCategory.Update(BannerCategory);
+            _unitOfWork.BannerCategory.Update(bannerCategory);
             _unitOfWork.Save();
         }
     }

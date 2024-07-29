@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Menu>
+<ul class="site-footer-links">
+    @foreach (var item in Model)
+    {
+        <li class="site-footer-link-item">
+            <a href="@item.MenuLink" class="site-footer-link">@item.MenuName</a>
+        </li>
+    }
+</ul>
+@* 
+<li class="site-footer-link-item">
+    <a href="#" class="site-footer-link">Browse categories</a>
+</li>
+
+<li class="site-footer-link-item">
+    <a href="#" class="site-footer-link">Help Center</a>
+</li>
+
+<li class="site-footer-link-item">
+    <a href="#" class="site-footer-link">Contact Us</a>
+</li> *@
