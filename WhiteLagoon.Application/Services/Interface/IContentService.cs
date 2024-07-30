@@ -17,5 +17,8 @@ namespace LibraryBook.Application.Services.Interface
         bool DeleteContent(int id);
         IEnumerable<Content> GetContentByCategory(string contentCategory);
         void DeleteImage(int imageId);
+        IEnumerable<Content> SearchContent(string searchString, int pageNumber, int pageSize);
+        IEnumerable<Content> GetAllContentPagination(int pageNumber, int pageSize);
+
     }
 }

@@ -1,13 +1,16 @@
-﻿using LibraryBook.Application.Services.Implementation;
+﻿using LibraryBook.Application.Common.Utility;
+using LibraryBook.Application.Services.Implementation;
 using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 
 namespace LibraryBook.Web.Controllers
 {
+    [Authorize(Roles =SD.Role_Admin)]
     public class ContentController : Controller
     {
         private readonly IContentService _contentService;
@@ -147,10 +150,5 @@ namespace LibraryBook.Web.Controllers
 
         }
 
-        public IActionResult ContentList()
-        {
-            var contents = _contentService.GetAllContent();
-            return View(contents);
-        }
     }
 }

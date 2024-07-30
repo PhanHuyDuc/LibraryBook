@@ -14,12 +14,18 @@ namespace LibraryBook.Controllers
         private readonly IVillaService _villaService;
         private readonly IWebsiteInfomationService _websiteInfomationService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IContentService _contentService;
+        private readonly IContentCategoryService _contentCategoryService;
 
-        public HomeController(IVillaService villaService, IWebHostEnvironment webHostEnvironment, IWebsiteInfomationService websiteInfomationService)
+
+        public HomeController(IVillaService villaService, IWebHostEnvironment webHostEnvironment, IWebsiteInfomationService websiteInfomationService, 
+                                IContentService contentService, IContentCategoryService contentCategoryService)
         {
             _villaService = villaService;
             _webHostEnvironment = webHostEnvironment;
             _websiteInfomationService = websiteInfomationService;
+            _contentService = contentService;
+            _contentCategoryService = contentCategoryService;
         }
 
         public IActionResult Index()
@@ -64,6 +70,17 @@ namespace LibraryBook.Controllers
         public IActionResult Contact()
         {
             return View();
+        }
+        [Route("alllist")]
+        public IActionResult ContentList(int pageNumber =1, int pageSize = 2)
+        {
+            var contents = _contentService.GetAllContentPagination(pageNumber, pageSize);
+            return View(contents);
+        }
+        public IActionResult SearchContent(string searchString, int page, int pageSize)
+        {
+            var contents = _contentService.SearchContent(searchString, page, pageSize);
+            return View(contents);
         }
 
         [HttpPost]

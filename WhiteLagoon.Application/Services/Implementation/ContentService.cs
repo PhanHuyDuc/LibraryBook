@@ -77,8 +77,8 @@ namespace LibraryBook.Application.Services.Implementation
                 _unitOfWork.Content.Update(content);
                 _unitOfWork.Save();
             }
-            
-        }       
+
+        }
 
         public bool DeleteContent(int id)
         {
@@ -95,7 +95,7 @@ namespace LibraryBook.Application.Services.Implementation
                         {
                             System.IO.File.Delete(oldImagePath);
                         }
-                    }                   
+                    }
 
                     string contentPath = @"images/ContentImage/content-" + id;
                     string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, contentPath);
@@ -207,8 +207,28 @@ namespace LibraryBook.Application.Services.Implementation
                     }
                 }
                 _unitOfWork.ContentImage.Remove(imageToBeDelete);
-                _unitOfWork.Save();                
-            }            
+                _unitOfWork.Save();
+            }
+        }
+
+        public IEnumerable<Content> SearchContent(string searchString, int pageNumber = 1, int pageSize = 5)
+        {
+            var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory");
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                contentList = contentList.Where(u => u.Name.ToLower().Contains(searchString) ||
+                                                u.Description.ToLower().Contains(searchString) ||
+                                                u.Author.ToLower().Contains(searchString));
+            }
+
+            var contentResult = contentList.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            return contentResult;
+        }
+
+        public IEnumerable<Content> GetAllContentPagination(int pageNumber, int pageSize)
+        {
+            var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory").Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            return contentList;
         }
     }
 }
