@@ -211,7 +211,7 @@ namespace LibraryBook.Application.Services.Implementation
             }
         }
 
-        public IEnumerable<Content> SearchContent(string searchString, int pageNumber = 1, int pageSize = 5)
+        public IEnumerable<Content> SearchContent(string searchString, int pageNumber, int pageSize)
         {
             var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory");
             if (!string.IsNullOrEmpty(searchString))
@@ -225,10 +225,43 @@ namespace LibraryBook.Application.Services.Implementation
             return contentResult;
         }
 
-        public IEnumerable<Content> GetAllContentPagination(int pageNumber, int pageSize)
+        public Pagination GetAllContentPagination(int pageNumber, int pageSize)
         {
+
             var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory").Skip((pageNumber - 1) * pageSize).Take(pageSize);
-            return contentList;
+            Pagination pagination = new()
+            {
+                Content = contentList,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalRecords = _unitOfWork.Content.GetAll().Count(),
+            };
+            return pagination;
+        }
+
+        public Pagination GetContentPaginationByCategory(int pageNumber, int pageSize, string ContentCat)
+        {
+            var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory").Where(u => u.ContentCategory.Name == ContentCat).Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            Pagination pagination = new()
+            {
+                Content = contentList,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalRecords = _unitOfWork.Content.GetAll().Count(),
+            };
+            return pagination;
+        }
+
+        public ContentDetail GetContentDetail(int id)
+        {
+            var contents = _unitOfWork.Content.Get(u => u.Id == id, includeProperties: "ContentCategory, ContentImage");
+            var relatedContents = _unitOfWork.Content.GetAll().Where(u => u.ContentCategoryId == contents.ContentCategoryId);
+            ContentDetail contentDetail = new()
+            {
+                Content = contents,
+                RelatedContent = relatedContents,
+            };
+            return contentDetail;
         }
     }
 }

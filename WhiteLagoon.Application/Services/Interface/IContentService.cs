@@ -12,13 +12,16 @@ namespace LibraryBook.Application.Services.Interface
     {
         IEnumerable<Content> GetAllContent();
         Content GetContentById(int id);
+        ContentDetail GetContentDetail(int id);
         void CreateContent(Content content);
         void UpdateContent(Content content);
         bool DeleteContent(int id);
         IEnumerable<Content> GetContentByCategory(string contentCategory);
         void DeleteImage(int imageId);
         IEnumerable<Content> SearchContent(string searchString, int pageNumber, int pageSize);
-        IEnumerable<Content> GetAllContentPagination(int pageNumber, int pageSize);
+        Pagination GetAllContentPagination(int pageNumber, int pageSize);
+        Pagination GetContentPaginationByCategory(int pageNumber, int pageSize,string ContentCat);
+
 
     }
 }

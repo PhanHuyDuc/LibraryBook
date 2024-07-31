@@ -72,9 +72,20 @@ namespace LibraryBook.Controllers
             return View();
         }
         [Route("alllist")]
-        public IActionResult ContentList(int pageNumber =1, int pageSize = 2)
+        public IActionResult AllList(int pageNumber =1, int pageSize = 2)
         {
             var contents = _contentService.GetAllContentPagination(pageNumber, pageSize);
+            return View(contents);
+        }
+        public IActionResult ContentList(string ContentCat, int pageNumber = 1, int pageSize = 2)
+        {
+            var contents = _contentService.GetContentPaginationByCategory(pageNumber, pageSize, ContentCat);
+            return View(contents);
+        }
+
+        public IActionResult ContentDetail(int ContentId)
+        {
+            var contents = _contentService.GetContentDetail(ContentId);
             return View(contents);
         }
         public IActionResult SearchContent(string searchString, int page, int pageSize)

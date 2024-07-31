@@ -10,13 +10,10 @@ using System.Threading.Tasks;
 
 namespace LibraryBook.Domain.Entities
 {
-    public class Pagination
+    public class ContentDetail
     {
-        public IEnumerable<Content> Content { get; set; }
-        public int CurrentPage { get; set; }
-        public int PageSize { get; set; }
-        public int TotalRecords { get; set; }
-        [ValidateNever]
-        public ContentCategory ContentCategory { get; set; }
+        public Content Content { get; set; }
+
+        public IEnumerable<Content> RelatedContent { get; set; }
     }
 }
