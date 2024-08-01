@@ -211,18 +211,41 @@ namespace LibraryBook.Application.Services.Implementation
             }
         }
 
-        public IEnumerable<Content> SearchContent(string searchString, int pageNumber, int pageSize)
+        public Pagination SearchContent(string search, int pageNumber, int pageSize)
         {
-            var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory");
-            if (!string.IsNullOrEmpty(searchString))
+
+            if (!string.IsNullOrEmpty(search))
             {
+                var searchString = search.Trim().ToLower();
+                var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory");
                 contentList = contentList.Where(u => u.Name.ToLower().Contains(searchString) ||
                                                 u.Description.ToLower().Contains(searchString) ||
-                                                u.Author.ToLower().Contains(searchString));
+                                                u.Author.ToLower().Contains(searchString)|| u.ContentCategory.Name.ToLower().Contains(searchString));
+                var contentResult = contentList.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+                Pagination pagination = new()
+                {
+                    Content = contentResult,
+                    CurrentPage = pageNumber,
+                    PageSize = pageSize,
+                    TotalRecords = contentList.Count(),
+                    SearchString = searchString,
+                };
+                return pagination;
+            }
+            else
+            {
+                var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory").Skip((pageNumber - 1) * pageSize).Take(pageSize);
+                Pagination pagination = new()
+                {
+                    Content = contentList,
+                    CurrentPage = pageNumber,
+                    PageSize = pageSize,
+                    TotalRecords = _unitOfWork.Content.GetAll().Count(),
+                };
+                return pagination;
             }
 
-            var contentResult = contentList.Skip((pageNumber - 1) * pageSize).Take(pageSize);
-            return contentResult;
+
         }
 
         public Pagination GetAllContentPagination(int pageNumber, int pageSize)
@@ -239,15 +262,17 @@ namespace LibraryBook.Application.Services.Implementation
             return pagination;
         }
 
-        public Pagination GetContentPaginationByCategory(int pageNumber, int pageSize, string ContentCat)
+        public Pagination GetContentPaginationByCategory(int pageNumber, int pageSize, int ContentCat)
         {
-            var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory").Where(u => u.ContentCategory.Name == ContentCat).Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            var contentList = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory").Where(u => u.ContentCategoryId == ContentCat).Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            var contentCat = _unitOfWork.ContentCategory.Get(u => u.Id == ContentCat);
             Pagination pagination = new()
             {
                 Content = contentList,
+                ContentCategory = contentCat,
                 CurrentPage = pageNumber,
                 PageSize = pageSize,
-                TotalRecords = _unitOfWork.Content.GetAll().Count(),
+                TotalRecords = _unitOfWork.Content.GetAll(includeProperties: "ContentCategory").Where(u => u.ContentCategoryId == ContentCat).Count(),
             };
             return pagination;
         }

@@ -18,7 +18,7 @@ namespace LibraryBook.Controllers
         private readonly IContentCategoryService _contentCategoryService;
 
 
-        public HomeController(IVillaService villaService, IWebHostEnvironment webHostEnvironment, IWebsiteInfomationService websiteInfomationService, 
+        public HomeController(IVillaService villaService, IWebHostEnvironment webHostEnvironment, IWebsiteInfomationService websiteInfomationService,
                                 IContentService contentService, IContentCategoryService contentCategoryService)
         {
             _villaService = villaService;
@@ -43,10 +43,10 @@ namespace LibraryBook.Controllers
 
         public IActionResult GetVillasByDate(int nights, DateOnly checkInDate)
         {
-           
+
             HomeVM homeVM = new()
             {
-                VillaList = _villaService.GetVillasAvailabilityByDate(nights,checkInDate),
+                VillaList = _villaService.GetVillasAvailabilityByDate(nights, checkInDate),
                 Nights = nights,
                 CheckInDate = checkInDate
             };
@@ -72,14 +72,14 @@ namespace LibraryBook.Controllers
             return View();
         }
         [Route("alllist")]
-        public IActionResult AllList(int pageNumber =1, int pageSize = 2)
+        public IActionResult AllList(int pageNumber = 1, int pageSize = 2)
         {
             var contents = _contentService.GetAllContentPagination(pageNumber, pageSize);
             return View(contents);
         }
-        public IActionResult ContentList(string ContentCat, int pageNumber = 1, int pageSize = 2)
+        public IActionResult ContentList(int contentCat, int pageNumber = 1, int pageSize = 2)
         {
-            var contents = _contentService.GetContentPaginationByCategory(pageNumber, pageSize, ContentCat);
+            var contents = _contentService.GetContentPaginationByCategory(pageNumber, pageSize, contentCat);
             return View(contents);
         }
 
@@ -88,9 +88,10 @@ namespace LibraryBook.Controllers
             var contents = _contentService.GetContentDetail(ContentId);
             return View(contents);
         }
-        public IActionResult SearchContent(string searchString, int page, int pageSize)
+        [HttpGet]
+        public IActionResult SearchContent(string search, int pageNumber = 1, int pageSize = 2)
         {
-            var contents = _contentService.SearchContent(searchString, page, pageSize);
+            var contents = _contentService.SearchContent(search, pageNumber, pageSize);
             return View(contents);
         }
 

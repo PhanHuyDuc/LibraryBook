@@ -15,8 +15,8 @@ namespace LibraryBook.Domain.Entities
         public IEnumerable<Content> Content { get; set; }
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
-        public int TotalRecords { get; set; }
-        [ValidateNever]
+        public int TotalRecords { get; set; }        
         public ContentCategory ContentCategory { get; set; }
+        public string? SearchString { get; set; }
     }
 }
