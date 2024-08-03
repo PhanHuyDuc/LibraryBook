@@ -4,21 +4,28 @@ using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 
 namespace LibraryBook.Web.Controllers
 {
-    [Authorize(Roles =SD.Role_Admin)]
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class ContentController : Controller
     {
         private readonly IContentService _contentService;
         private readonly IContentCategoryService _contentCategoryService;
-        public ContentController(IContentService contentService, IContentCategoryService contentCategoryService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public ContentController(IContentService contentService, IContentCategoryService contentCategoryService,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _contentService = contentService;
-            _contentCategoryService = contentCategoryService;                       
+            _contentCategoryService = contentCategoryService;  
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -38,11 +45,20 @@ namespace LibraryBook.Web.Controllers
             return View(contentVM);
         }
         [HttpPost]
-        public IActionResult Create(ContentVM obj)
+        public async Task<IActionResult> Create(ContentVM obj)
         {
             if (ModelState.IsValid)
-            {                
-                obj.Content.IsActive = true;
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                {
+                    obj.Content.IsActive = true;
+                }
+                else
+                {
+                    obj.Content.IsActive = false;
+                }
+               
                 _contentService.CreateContent(obj.Content);
                 TempData["success"] = "Create successfully";
                 return RedirectToAction(nameof(Index));
@@ -78,7 +94,7 @@ namespace LibraryBook.Web.Controllers
 
         [HttpPost]
         
-        public IActionResult Update(ContentVM contentVM)
+        public async Task<IActionResult> Update(ContentVM contentVM)
         {
             contentVM.ContentCategoryList = _contentCategoryService.GetAllContentCategory().Select(u => new SelectListItem
             {
@@ -86,8 +102,17 @@ namespace LibraryBook.Web.Controllers
                 Value = u.Id.ToString()
             });
             if (ModelState.IsValid && contentVM.Content.Id > 0)
-            {                        
-                contentVM.Content.IsActive = true;
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                {
+                    contentVM.Content.IsActive = true;
+                }
+                else
+                {
+                    contentVM.Content.IsActive = false;
+                }
+               
                 _contentService.UpdateContent(contentVM.Content);
                 TempData["success"] = "Updated successfully";
                 return RedirectToAction(nameof(Index));

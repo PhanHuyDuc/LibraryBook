@@ -5,10 +5,11 @@ using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Infrastructure.Data;
 using LibraryBook.Infrastructure.Repositoty;
+using LibraryBook.Application.Common.Utility;
 
 namespace LibraryBook.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class VillaController : Controller
     {
        private readonly IVillaService _villaService;

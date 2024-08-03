@@ -39,29 +39,46 @@
                         <td>
                             <div class="w-75 btn-group" role="group">
                                 @{
-                                    if (obj.IsActive)
+                                    if (User.IsInRole(SD.Role_Admin))
                                     {
-                                        <a asp-controller="Media" asp-action="ChangeStatusMedia" asp-route-mediaId="@obj.Id"
-                                           class="btn btn-success mx-2">
-                                            <i class="bi bi-play-fill"></i> Active
-                                        </a>
+                                        if (obj.IsActive)
+                                        {
+                                            <a asp-controller="Media" asp-action="ChangeStatusMedia" asp-route-mediaId="@obj.Id"
+                                               class="btn btn-success mx-2">
+                                                <i class="bi bi-play-fill"></i> Active
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Media" asp-action="ChangeStatusMedia" asp-route-mediaId="@obj.Id"
+                                               class="btn btn-warning mx-2">
+                                                <i class="bi bi-pause-fill"></i> Disable
+                                            </a>
+                                        }
                                     }
-                                    else
-                                    {
-                                        <a asp-controller="Media" asp-action="ChangeStatusMedia" asp-route-mediaId="@obj.Id"
-                                           class="btn btn-warning mx-2">
-                                            <i class="bi bi-pause-fill"></i> Disable
-                                        </a>
-                                    }
+                                   
                                 }
                                 <a asp-controller="Media" asp-action="Update" asp-route-mediaId="@obj.Id"
                                    class="btn btn-success mx-2">
                                     <i class="bi bi-pencil-square"></i> Update
                                 </a>
-                                <a asp-controller="Media" asp-action="Delete" asp-route-mediaId="@obj.Id"
-                                   class="btn btn-danger mx-2">
-                                    <i class="bi bi-trash-fill"></i> Delete
-                                </a>
+                                @{
+                                    if (obj.IsActive==false)
+                                    {
+                                        <a asp-controller="Media" asp-action="Delete" asp-route-mediaId="@obj.Id"
+                                           class="btn btn-danger mx-2">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <button disabled title="Please active to delete"
+                                           class="btn btn-danger mx-2">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </button>
+                                    }
+                                }
+                                
                             </div>
                         </td>
                     </tr>

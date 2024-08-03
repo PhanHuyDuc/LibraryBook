@@ -1,22 +1,31 @@
-﻿using LibraryBook.Application.Services.Implementation;
+﻿using LibraryBook.Application.Common.Utility;
+using LibraryBook.Application.Services.Implementation;
 using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 
 namespace LibraryBook.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class MenuController : Controller
     {
         private readonly IMenuService _menuService;
         private readonly IMenuCategoryService _menuCategoryService;
-        public MenuController(IMenuService menuService, IMenuCategoryService menuCategoryService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public MenuController(IMenuService menuService, IMenuCategoryService menuCategoryService,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _menuService = menuService;
             _menuCategoryService = menuCategoryService;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -53,7 +62,7 @@ namespace LibraryBook.Web.Controllers
             return View(menuVM);
         }
         [HttpPost]
-        public IActionResult Create(MenuVM obj)
+        public async Task<IActionResult> Create(MenuVM obj)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +79,16 @@ namespace LibraryBook.Web.Controllers
                 {
                     obj.Menu.TreeView = 1;
                 }
-                obj.Menu.IsActive = true;
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                {
+                    obj.Menu.IsActive = true;
+                }
+                else
+                {
+                    obj.Menu.IsActive = false;
+                }
+                
                 _menuService.CreateMenu(obj.Menu);
                 TempData["success"] = "Create successfully";
                 return RedirectToAction(nameof(Index));
@@ -136,7 +154,7 @@ namespace LibraryBook.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(MenuVM menuVM)
+        public async Task<IActionResult> Update(MenuVM menuVM)
         {
             menuVM.MenuCategoryList = _menuCategoryService.GetAllMenuCategory().Select(u => new SelectListItem
             {
@@ -175,7 +193,16 @@ namespace LibraryBook.Web.Controllers
                 {
                     menuVM.Menu.TreeView = 1;
                 }
-                menuVM.Menu.IsActive = true;
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                {
+                    menuVM.Menu.IsActive = true;
+                }
+                else
+                {
+                    menuVM.Menu.IsActive = false;
+                }
+                
                 _menuService.UpdateMenu(menuVM.Menu);
                 TempData["success"] = "Updated successfully";
                 return RedirectToAction(nameof(Index));

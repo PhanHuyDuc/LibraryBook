@@ -8,10 +8,11 @@ using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Infrastructure.Data;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace LibraryBook.Web.Controllers
 {
-    [Authorize(Roles =SD.Role_Admin)]
+    [Authorize(Roles =SD.Role_Admin +","+ SD.Role_Manager)]
     public class AmenityController : Controller
     {
         private readonly IAmenityService _amenityService;

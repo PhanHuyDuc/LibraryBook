@@ -1,21 +1,31 @@
-﻿using LibraryBook.Application.Services.Implementation;
+﻿using LibraryBook.Application.Common.Utility;
+using LibraryBook.Application.Services.Implementation;
 using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 
 namespace LibraryBook.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class BannerController : Controller
     {
         private readonly IBannerService _bannerService;
         private readonly IBannerCategoryService _bannerCategoryService;
-        public BannerController(IBannerService bannerService, IBannerCategoryService bannerCategoryService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public BannerController(IBannerService bannerService, IBannerCategoryService bannerCategoryService,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _bannerService = bannerService;
-            _bannerCategoryService = bannerCategoryService;            
+            _bannerCategoryService = bannerCategoryService;  
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -35,11 +45,20 @@ namespace LibraryBook.Web.Controllers
             return View(bannerVM);
         }
         [HttpPost]
-        public IActionResult Create(BannerVM obj)
+        public async Task<IActionResult> Create(BannerVM obj)
         {
             if (ModelState.IsValid)
-            {                
-                obj.Banner.IsActive = true;
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                {
+                    obj.Banner.IsActive = true;
+                }
+                else
+                {
+                    obj.Banner.IsActive = false;
+                }
+                    
                 _bannerService.CreateBanner(obj.Banner);
                 TempData["success"] = "Create successfully";
                 return RedirectToAction(nameof(Index));
@@ -72,7 +91,7 @@ namespace LibraryBook.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(BannerVM bannerVM)
+        public async Task<IActionResult> Update(BannerVM bannerVM)
         {
             bannerVM.BannerCategoryList = _bannerCategoryService.GetAllBannerCategory().Select(u => new SelectListItem
             {
@@ -80,8 +99,17 @@ namespace LibraryBook.Web.Controllers
                 Value = u.Id.ToString()
             });
             if (ModelState.IsValid && bannerVM.Banner.Id > 0)
-            {                        
-                bannerVM.Banner.IsActive = true;
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                {
+                    bannerVM.Banner.IsActive = true;
+                }
+                else
+                {
+                    bannerVM.Banner.IsActive = false;
+                }
+                    
                 _bannerService.UpdateBanner(bannerVM.Banner);
                 TempData["success"] = "Updated successfully";
                 return RedirectToAction(nameof(Index));

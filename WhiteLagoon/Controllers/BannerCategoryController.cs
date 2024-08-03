@@ -1,10 +1,13 @@
-﻿using LibraryBook.Application.Services.Implementation;
+﻿using LibraryBook.Application.Common.Utility;
+using LibraryBook.Application.Services.Implementation;
 using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryBook.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class BannerCategoryController : Controller
     {
         private readonly IBannerCategoryService _BannerCategoryService;

@@ -6,9 +6,12 @@ using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Infrastructure.Data;
 using LibraryBook.Web.ViewModels;
+using LibraryBook.Application.Common.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBook.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class VillaNumberController : Controller
     {
         private readonly IVillaNumberService _villaNumberService;

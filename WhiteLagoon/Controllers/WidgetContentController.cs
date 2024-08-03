@@ -1,21 +1,31 @@
-﻿using LibraryBook.Application.Services.Implementation;
+﻿using LibraryBook.Application.Common.Utility;
+using LibraryBook.Application.Services.Implementation;
 using LibraryBook.Application.Services.Interface;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 
 namespace LibraryBook.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class WidgetContentController : Controller
     {
         private readonly IWidgetContentService _widgetContentService;
         private readonly IWidgetContentCategoryService _widgetContentCategoryService;
-        public WidgetContentController(IWidgetContentService widgetContentService, IWidgetContentCategoryService widgetContentCategoryService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public WidgetContentController(IWidgetContentService widgetContentService, IWidgetContentCategoryService widgetContentCategoryService,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _widgetContentService = widgetContentService;
-            _widgetContentCategoryService = widgetContentCategoryService;            
+            _widgetContentCategoryService = widgetContentCategoryService;   
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -35,11 +45,20 @@ namespace LibraryBook.Web.Controllers
             return View(widgetContentVM);
         }
         [HttpPost]
-        public IActionResult Create(WidgetContentVM obj)
+        public async Task<IActionResult> Create(WidgetContentVM obj)
         {
             if (ModelState.IsValid)
-            {                
-                obj.WidgetContent.IsActive = true;
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                {
+                    obj.WidgetContent.IsActive = true;
+                }
+                else
+                {
+                    obj.WidgetContent.IsActive = false;
+                }
+                
                 _widgetContentService.CreateWidgetContent(obj.WidgetContent);
                 TempData["success"] = "Create successfully";
                 return RedirectToAction(nameof(Index));
@@ -72,7 +91,7 @@ namespace LibraryBook.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(WidgetContentVM widgetContentVM)
+        public async Task<IActionResult> Update(WidgetContentVM widgetContentVM)
         {
             widgetContentVM.WidgetContentCategoryList = _widgetContentCategoryService.GetAllWidgetContentCategory().Select(u => new SelectListItem
             {
@@ -80,8 +99,17 @@ namespace LibraryBook.Web.Controllers
                 Value = u.Id.ToString()
             });
             if (ModelState.IsValid && widgetContentVM.WidgetContent.Id > 0)
-            {                        
-                widgetContentVM.WidgetContent.IsActive = true;
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                {
+                    widgetContentVM.WidgetContent.IsActive = true;
+                }
+                else
+                {
+                    widgetContentVM.WidgetContent.IsActive = false;
+                }
+                
                 _widgetContentService.UpdateWidgetContent(widgetContentVM.WidgetContent);
                 TempData["success"] = "Updated successfully";
                 return RedirectToAction(nameof(Index));

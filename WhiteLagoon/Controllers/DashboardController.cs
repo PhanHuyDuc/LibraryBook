@@ -4,9 +4,11 @@ using LibraryBook.Application.Common.Utility;
 using LibraryBook.Application.Services.Implementation;
 using LibraryBook.Application.Services.Interface;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBook.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class DashboardController : Controller
     {
         private readonly IDashboardService _dashboardService;

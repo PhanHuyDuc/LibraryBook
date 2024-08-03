@@ -17,6 +17,7 @@ using LibraryBook.Application.Services.Interface;
 
 namespace LibraryBook.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Manager)]
     public class BookingController : Controller
     {
         private readonly IBookingService _bookingService;

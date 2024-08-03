@@ -6,9 +6,11 @@ using LibraryBook.Application.Common.Utility;
 using LibraryBook.Application.Services.Interface;
 using LibraryBook.Models;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBook.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly IVillaService _villaService;

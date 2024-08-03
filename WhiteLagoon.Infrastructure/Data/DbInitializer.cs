@@ -38,10 +38,11 @@ namespace LibraryBook.Infrastructure.Data
                     _db.Database.Migrate();
                 }
 
-                if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
+                if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult() || !_roleManager.RoleExistsAsync(SD.Role_Manager).GetAwaiter().GetResult())
                 {
                     _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).Wait();
                     _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).Wait();
+                    _roleManager.CreateAsync(new IdentityRole(SD.Role_Manager)).Wait();
                     _userManager.CreateAsync(new ApplicationUser
                     {
                         UserName = "admin@gmail.com",

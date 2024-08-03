@@ -10,17 +10,22 @@ namespace LibraryBook.Web.Controllers
 {
     public class AccountController : Controller
     {
-        
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         public AccountController(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
-            
+
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+        }
+        public IActionResult Index()
+        {
+            var users = _userManager.Users.ToList();
+            return View(users);
         }
         public IActionResult Login(string returnUrl = null)
         {
@@ -43,6 +48,10 @@ namespace LibraryBook.Web.Controllers
                 {
                     var user = await _userManager.FindByEmailAsync(loginVM.Email);
                     if (await _userManager.IsInRoleAsync(user, SD.Role_Admin))
+                    {
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                    else if (await _userManager.IsInRoleAsync(user, SD.Role_Manager))
                     {
                         return RedirectToAction("Index", "Dashboard");
                     }
@@ -72,7 +81,7 @@ namespace LibraryBook.Web.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-           
+
             RegisterVM registerVM = new()
             {
                 RoleList = _roleManager.Roles.Select(x => new SelectListItem
@@ -145,6 +154,23 @@ namespace LibraryBook.Web.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+       
+        [HttpGet]
+        public async Task<IActionResult> Delete(string UserId)
+        {
+            ApplicationUser? objFromDb = _userManager.Users.FirstOrDefault(u => u.Id == UserId);
+            if (objFromDb is not null)
+            {
+
+                await _userManager.DeleteAsync(objFromDb);
+
+                TempData["success"] = "Deleted successfully";
+                return RedirectToAction(nameof(Index));
+
+            }
+            TempData["error"] = "Deleted failed";
+            return RedirectToAction(nameof(Index));
         }
     }
 }
