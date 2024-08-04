@@ -1,0 +1,264 @@
+﻿@model TTHSVM
+@{
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container pt-5">
+    <div class="card shadow border ">
+        <div class="card-header bg-success bg-gradient ml-0 py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="py-2 text-white">Nhập thông tin học sinh</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <form class="row" method="post">
+                        <div class="form-floating mb-3 col-md-12">
+                            <input asp-for="ClassName" class="form-control" aria-required="true" />
+                            <label asp-for="ClassName" class="ms-2 text-muted">Lớp</label>
+                            <span asp-validation-for="ClassName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="StudentName" class="form-control" />
+                            <label asp-for="StudentName" class="ms-2 text-muted">Họ tên</label>
+                            <span asp-validation-for="StudentName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <select asp-for="Gender" class="form-select">
+                                <option disabled selected>-Giới tính-</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input type="date" asp-for="DoB" class="form-control" />
+                            <label asp-for="DoB" class="ms-2 text-muted">Ngày tháng năm sinh</label>
+                            <span asp-validation-for="DoB" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="DanToc" class="form-control" />
+                            <label asp-for="DanToc" class="ms-2 text-muted">Dân tộc</label>
+                            <span asp-validation-for="DanToc" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Sonha" class="form-control" />
+                            <label asp-for="Sonha" class="ms-2 text-muted">Số nhà</label>
+                            <span asp-validation-for="Sonha" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="To" class="form-control" />
+                            <label asp-for="To" class="ms-2 text-muted">Tổ</label>
+                            <span asp-validation-for="To" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Ap" class="form-control" />
+                            <label asp-for="Ap" class="ms-2 text-muted">Ấp</label>
+                            <span asp-validation-for="Ap" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Xa" class="form-control" />
+                            <label asp-for="Xa" class="ms-2 text-muted">Xã</label>
+                            <span asp-validation-for="Xa" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="QH" class="form-control" />
+                            <label asp-for="QH" class="ms-2 text-muted">Quận/Huyện</label>
+                            <span asp-validation-for="QH" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input type="number" asp-for="PhoneNumber" class="form-control" />
+                            <label asp-for="PhoneNumber" class="ms-2 text-muted">SĐT</label>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="FatherName" class="form-control" />
+                            <label asp-for="FatherName" class="ms-2 text-muted">Họ và tên cha</label>
+                            <span asp-validation-for="FatherName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input type="number" asp-for="FatherPhoneNumber" class="form-control" />
+                            <label asp-for="FatherPhoneNumber" class="ms-2 text-muted">SĐT cha</label>
+                            <span asp-validation-for="FatherPhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="FatherJob" class="form-control" />
+                            <label asp-for="FatherJob" class="ms-2 text-muted">Nghề nghiệp cha</label>
+                            <span asp-validation-for="FatherJob" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="FatherPoJ" class="form-control" />
+                            <label asp-for="FatherPoJ" class="ms-2 text-muted">Nơi làm việc cha</label>
+                            <span asp-validation-for="FatherPoJ" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="MotherName" class="form-control" />
+                            <label asp-for="MotherName" class="ms-2 text-muted">Họ và tên mẹ</label>
+                            <span asp-validation-for="MotherName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input type="number" asp-for="MotherPhoneNumber" class="form-control" />
+                            <label asp-for="MotherPhoneNumber" class="ms-2 text-muted">SĐT mẹ</label>
+                            <span asp-validation-for="MotherPhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="MotherJob" class="form-control" />
+                            <label asp-for="MotherJob" class="ms-2 text-muted">Nghề nghiệp mẹ</label>
+                            <span asp-validation-for="MotherJob" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input  asp-for="MotherPoJ" class="form-control" />
+                            <label asp-for="MotherPoJ" class="ms-2 text-muted">Nơi làm việc mẹ</label>
+                            <span asp-validation-for="MotherPoJ" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 col-md-12">                            
+                           <label class="ms-2 text-muted" style="margin-right:2px" asp-for="Doan">Đoàn TNCSHCM</label>
+                            <input type="checkbox" class="form-check-input" asp-for="Doan"/>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label class="ms-2 text-muted" style="margin-right:2px">Hiện tại sinh sống với:</label>                            
+                        </div>
+                        <div class="mb-3 col-md-2">                            
+                           <label class="ms-2 text-muted" style="margin-right:2px" asp-for="FwM">Cha, mẹ</label>
+                            <input type="checkbox" class="form-check-input" asp-for="FwM"/>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="Father">Cha</label>
+                            <input type="checkbox" class="form-check-input" asp-for="Father" />
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="Mother">Mẹ</label>
+                            <input type="checkbox" class="form-check-input" asp-for="Mother" />
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="GFM">Ông, bà</label>
+                            <input type="checkbox" class="form-check-input" asp-for="GFM" />
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="BWS">Anh, chị</label>
+                            <input type="checkbox" class="form-check-input" asp-for="BWS" />
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="Other">Khác</label>
+                            <input type="checkbox" class="form-check-input" asp-for="Other" />
+                        </div>
+                        <div class="form-floating mb-3 col-md-12">
+                            <input asp-for="Reason" class="form-control" />
+                            <label asp-for="Reason" class="ms-2 text-muted">Nếu không sống cùng cha, mẹ cho biết lý do:</label>
+                            <span asp-validation-for="Reason" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label class="ms-2 text-muted" style="margin-right:2px">Điều kiện kinh tế gia đình:</label>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="XDGN">XĐGN</label>
+                            <input type="checkbox" class="form-check-input" asp-for="XDGN" />
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="KhoKhan">Khó khăn</label>
+                            <input type="checkbox" class="form-check-input" asp-for="KhoKhan" />
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="Other2">Khác</label>
+                            <input type="checkbox" class="form-check-input" asp-for="Other2" />
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label class="ms-2 text-muted" style="margin-right:2px">Diện chính sách:</label>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="ConTb">Con thương binh</label>
+                            <input type="checkbox" class="form-check-input" asp-for="ConTb" />
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="ms-2 text-muted" style="margin-right:2px" asp-for="GDCCCM">Gia đình có công CM</label>
+                            <input type="checkbox" class="form-check-input" asp-for="GDCCCM" />
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="TTSK" class="form-control" />
+                            <label asp-for="TTSK" class="ms-2 text-muted">Tình trạng sức khỏe</label>
+                            <span asp-validation-for="TTSK" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="BenhTat" class="form-control" />
+                            <label asp-for="BenhTat" class="ms-2 text-muted">Có bệnh tật gì không?</label>
+                            <span asp-validation-for="BenhTat" class="text-danger"></span>
+                        </div>
+                         <div class="form-floating mb-3 col-md-6">
+                            <input  asp-for="HanhKiem" class="form-control" />
+                            <label asp-for="HanhKiem" class="ms-2 text-muted">Hạnh kiểm</label>
+                            <span asp-validation-for="HanhKiem" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="HocLuc" class="form-control" />
+                            <label asp-for="HocLuc" class="ms-2 text-muted">Học lực</label>
+                            <span asp-validation-for="HocLuc" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-12">
+                            <input asp-for="NangKhieu" class="form-control" />
+                            <label asp-for="NangKhieu" class="ms-2 text-muted">Năng khiếu</label>
+                            <span asp-validation-for="NangKhieu" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-12">
+                            <input asp-for="NguyenVong" class="form-control" />
+                            <label asp-for="NguyenVong" class="ms-2 text-muted">Nguyện vọng</label>
+                            <span asp-validation-for="NguyenVong" class="text-danger"></span>
+                        </div>
+                         <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="HKiem2" class="form-control" />
+                            <label asp-for="HKiem2" class="ms-2 text-muted">Hạnh kiểm</label>
+                            <span asp-validation-for="HKiem2" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="HLuc2" class="form-control" />
+                            <label asp-for="HLuc2" class="ms-2 text-muted">Học lực</label>
+                            <span asp-validation-for="HLuc2" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-3">
+                            <input type="number" asp-for="Ngay" class="form-control" />
+                            <label asp-for="Ngay" class="ms-2 text-muted">Ngày</label>
+                            <span asp-validation-for="Ngay" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-3">
+                            <input type="number" asp-for="Thang" class="form-control" />
+                            <label asp-for="Thang" class="ms-2 text-muted">Tháng</label>
+                            <span asp-validation-for="Thang" class="text-danger"></span>
+                        </div>
+                         <div class="form-floating mb-3 col-md-3">
+                            <input asp-for="PHHS" class="form-control" />
+                            <label asp-for="PHHS" class="ms-2 text-muted">Xác nhận của PHHS (ghi rõ họ tên)</label>
+                            <span asp-validation-for="PHHS" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-3">
+                            <input asp-for="HS" class="form-control" />
+                            <label asp-for="HS" class="ms-2 text-muted">Xác nhận của học sinh (ghi rõ họ tên)</label>
+                            <span asp-validation-for="HS" class="text-danger"></span>
+                        </div>
+                       
+                        <div class="col-12">
+                            <button asp-action="Index"
+                                    asp-route-downloadType="word" type="submit"
+                                    class="btn btn-success">
+                                <i class="bi bi-file-earmark-word"></i> Xuất file Word
+                            </button>
+
+                            <button asp-action="Index"
+                                    asp-route-downloadType="pdf" type="submit"
+                                    class="btn btn-danger">
+                                <i class="bi bi-file-earmark-pdf"></i> Xuất file PDF
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

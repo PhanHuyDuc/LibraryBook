@@ -70,7 +70,7 @@ app.UseAuthorization();
 SeedDatabase();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=TTHS}/{action=Index}/{id?}");
 
 app.Run();
 void SeedDatabase()

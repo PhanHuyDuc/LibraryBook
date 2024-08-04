@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBook.Controllers
 {
-    
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IVillaService _villaService;

@@ -5,6 +5,7 @@ using LibraryBook.Application.Common.Interfaces;
 using LibraryBook.Application.Common.Utility;
 using LibraryBook.Domain.Entities;
 using LibraryBook.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBook.Web.Controllers
 {
@@ -22,6 +23,7 @@ namespace LibraryBook.Web.Controllers
             _roleManager = roleManager;
             _signInManager = signInManager;
         }
+        [Authorize]
         public IActionResult Index()
         {
             var users = _userManager.Users.ToList();
